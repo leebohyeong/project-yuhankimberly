@@ -1,0 +1,15 @@
+.DS_Store
+package-lock.json
+
+.idea/
+node_modules/
+
+assets/css/*
+assets/js/*
+
+vendor/
+logs/
+composer.lock
+composer.phar
+property.php
+src/config.php
