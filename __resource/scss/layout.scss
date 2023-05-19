@@ -7,7 +7,10 @@ body {
 }
 
 .header {
+    position: sticky;
+    top: 0;
     background-color: #222;
+    z-index: 100;
 
     > div {
         display: flex;
@@ -22,11 +25,6 @@ body {
             width: getSize(103px);
             height: getSize(30px);
             background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
-
-            //@include media-queries($from: md) {
-            //    width: 103px;
-            //    height: 30px;
-            //}
         }
 
         span {
@@ -38,10 +36,6 @@ body {
         display: flex;
         align-items: center;
         column-gap: getSize(30px);
-
-        //@include media-queries($from: md) {
-        //    column-gap: 30px;
-        //}
     }
 
 
@@ -52,11 +46,6 @@ body {
         color: var(--site-header-menu-color);
         font-weight: $font-weight-medium;
         font-size: getSize(22px);
-
-        //@include media-queries($from: md) {
-        //    padding: 26px 0;
-        //    font-size: 22px;
-        //}
 
         &::after {
             position: absolute;
@@ -80,4 +69,22 @@ body {
         }
     }
 
+}
+
+.footer {
+    position: relative;
+    background: url(/assets/images/img_footer.jpg) no-repeat center/cover;
+    aspect-ratio: 720/1097;
+
+    a {
+        position: absolute;
+        top: 69.5%;
+        left: 35%;
+        width: 38%;
+        height: 5.5%;
+
+        span {
+            @include visually-hidden;
+        }
+    }
 }

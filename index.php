@@ -55,7 +55,7 @@
             </div>
             <div class="intro-tab">
                 <div class="intro-tab__nav">
-                    <ul>
+                    <ul role="tablist">
                         <li><a href="#" class="intro-tab__nav-link intro-tab__nav-link--active">부족했던 우리 이야기</a></li>
                         <li><a href="#" class="intro-tab__nav-link">멸종위기종에게</a></li>
                         <li><a href="#" class="intro-tab__nav-link">산불 피해 후유증</a></li>
@@ -65,30 +65,62 @@
                     </ul>
                 </div>
                 <div class="intro-tab__contents">
+                    <div class="intro-tab__nav-link--active" style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
                     <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
                 </div>
             </div>
         </section>
-<!--        <section class="main__event">-->
-<!--            <p>-->
-<!--                <button type="button">리액션 남기러 가기</button>-->
-<!--            </p>-->
-<!--            <div>-->
-<!--                <p>-->
-<!--                    <strong>1,983</strong>건-->
-<!--                </p>-->
-<!--                <p>1만건 달성</p>-->
-<!--                <p></p>-->
-<!--                <p>현재까지 이만큼 리액션을 남겨주셨어요!</p>-->
-<!--            </div>-->
-<!--        </section>-->
-<!--        <section class="main__donation"></section>-->
-<!--        <section class="main__story"></section>-->
+        <section class="main__event">
+            <div style="background-image: url(/assets/images/img_event_1.jpg)">
+                <p>
+                    <a href="#eventModal" class="main__event-link">
+                        <span>리액션 남기러 가기</span>
+                    </a>
+                </p>
+            </div>
+            <div>
+                <div>
+                    <p>
+                        <strong>1,983</strong>건
+                    </p>
+                    <p>1만건 달성</p>
+                    <p></p>
+                </div>
+            </div>
+            <div style="background-image: url(/assets/images/img_event_2.jpg)"></div>
+        </section>
+        <section class="main__donation"></section>
+        <section class="main__story"></section>
+        <div class="event-modal modal" id="eventModal">
+            <div class="modal__backdrop"></div>
+            <div class="modal__dialog modal-boost-us__dialog">
+                <div class="modal__container">
+                    <div class="modal__title">
+                        <img src="/assets/images/img_event_modal_title.png" alt="우리강산 푸르게 푸르게 39주년 반성문에 대한 별점과 한줄평 부탁드립니다!">
+                    </div>
+                    <div class="moda__content">
+
+                        <p>
+                            <button type="button" class="modal__submit"></button>
+                        </p>
+                    </div>
+                    <div class="modal__close">
+                        <button class="modal__close-button" type="button"><span class="modal__close-text">닫기</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+    <footer class="footer">
+        <p>
+            <a href="https://www.yuhan-kimberly.co.kr/" target="_blank">
+                <span>유한킴벌리 홈페이지 바로 가기</span>
+            </a>
+        </p>
+    </footer>
 </body>
 </html>

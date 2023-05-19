@@ -1,0 +1,103 @@
+@use "sass:math";
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+
+    &--open {
+        display: block;
+    }
+
+    &__backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity .15s linear;
+        background: rgba(0, 0, 0, .65);
+    }
+
+    &__dialog {
+        position: relative;
+        pointer-events: none;
+        transform: translate(0, -50px);
+        opacity: 0;
+        transition: transform .3s ease-out, opacity .15s linear;
+        margin: 100px auto;
+    }
+
+    &__container {
+        overflow: hidden;
+        position: relative;
+        max-width: 700px;
+        width: calc(100% - 40px);
+        margin: 0 auto;
+        padding: getSize(52px) getSize(44px);
+        background: #fff;
+        box-sizing: border-box;
+        pointer-events: auto;
+    }
+
+    &__title{
+        text-align: center;
+
+        h2,p {
+            @include visually-hidden;
+        }
+    }
+
+    &__submit {
+        display: block;
+        width: getSize(336px);
+        height: getSize(84px);
+        margin: 0 auto;
+        background: transparent url(/assets/images/img_event_modal_button.jpg) no-repeat center/cover;
+        border: none;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+
+        &-button {
+            display: block;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: transparent url(/assets/images/icon_event_modal_close_button.png) no-repeat center/auto 20px;
+            border: none;
+        }
+
+        &-text {
+            @include visually-hidden;
+        }
+    }
+
+    &--fade & {
+        &__backdrop {
+            opacity: 1;
+        }
+
+        &__dialog {
+            opacity: 1;
+            transform: none;
+        }
+    }
+}
+
+.modal-open {
+    overflow: hidden;
+    height: 100%;
+}
