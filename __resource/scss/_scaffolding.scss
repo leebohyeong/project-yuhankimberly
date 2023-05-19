@@ -1,0 +1,63 @@
+/*! scaffolding */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+button,
+dl,
+dt,
+dd,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+li,
+p,
+table,
+td,
+th {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+address {
+    font-style: normal;
+}
+
+[role="button"],
+button {
+    cursor: pointer;
+}
+
+select {
+    background: #fff url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 8'><path fill-rule='evenodd'  fill='rgb(0, 0, 0)' d='M0.619,0.103 L13.468,0.103 L8.226,7.093 L6.918,7.093 L0.619,0.103 Z'/></svg>") no-repeat right 12px center/8px auto;
+    &::-ms-expand {
+        display: none;
+    }
+}
+
+em {
+    font-style: normal;
+}

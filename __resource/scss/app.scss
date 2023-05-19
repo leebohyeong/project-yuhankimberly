@@ -1,3 +1,10 @@
-body {
-    background-color: red;
-}
+@import "mixins";
+@import "variables";
+
+@import "root";
+@import "fonts";
+@import "vendors";
+@import "scaffolding";
+@import "layout";
+@import "main";
+

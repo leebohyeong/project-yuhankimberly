@@ -1,0 +1,166 @@
+@use "sass:math";
+
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@function getSize($size) {
+    @return ceil(math.div($size, $deviceRatio));
+}
+
+$deviceRatio: 2;
+
+@mixin clearfix {
+    &::after {
+        display: block;
+        clear: both;
+        content: "";
+    }
+}
+
+@function first-index($string, $direction: 'left') {
+    @for $i from 1 through str-length($string) {
+        $index: if($direction == 'left', $i, -$i);
+
+        @if str-slice($string, $index, $index) != ' ' {
+            @return $index;
+        }
+    }
+
+    @return 0;
+}
+
+@function trim($string) {
+    @return str-slice(
+                    $string,
+                    first-index($string, 'left'),
+                    first-index($string, 'right')
+    );
+}
+
+@function is-px($value) {
+    @error type-of($value) == 'number';
+    @error (str-index(inspect($value), px) != null);
+    @return (type-of($value) == 'number') and (str-index(inspect($value), px) != null);
+}
+
+$media-queries-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        //lg: 1024px,
+        //lg: 992px,
+        //xl: 1200px,
+        //xxl: 1400px
+) !default;
+
+@mixin media-queries($args...) {
+    $args: keywords($args);
+    $media-type: screen;
+    $from: null;
+    $has-from: false;
+    $to: null;
+    $has-to: false;
+    $expression: null;
+    $breakpoints: $media-queries-breakpoints;
+    $queries: '';
+
+    @if map-has-key($args, 'media-type') {
+        $media-type: map-get($args, 'media-type');
+    }
+
+    @if map-has-key($args, 'expression') {
+        $expression: map-get($args, 'expression');
+    }
+
+    @if map-has-key($args, 'breakpoints') {
+        $breakpoints: map-merge($breakpoints, map-get($args, 'breakpoints'));
+    }
+
+    @if map-has-key($args, 'from') {
+        $from: map-get($args, 'from');
+
+        @if map-has-key($breakpoints, $from) {
+            $from: map-get($breakpoints, $from);
+            $has-from: true;
+        }
+    }
+
+    @if map-has-key($args, 'to') {
+        $to: map-get($args, 'to');
+
+        @if map-has-key($breakpoints, $to) {
+            $to: map-get($breakpoints, $to);
+            $has-to: true;
+        }
+    }
+
+    $queries: $media-type;
+
+    @if $from {
+        $queries: append($queries, "and (min-width: #{$from})", space);
+    }
+
+    @if $to {
+        $queries: append($queries, "and (max-width: #{$to - 1})", space);
+    }
+
+    @if $expression {
+        @each $key, $value in $expression {
+            @if $key == media-type {
+                $queries: append($queries, ", #{$value}", space);
+            } @else if $key == from {
+                $expression-from: $value;
+
+                @if map-has-key($breakpoints, $expression-from) {
+                    $expression-from: map-get($breakpoints, $expression-from);
+                }
+
+                $queries: append($queries, "and (min-width: #{$expression-from})", space);
+            } @else if $key == to {
+                $expression-to: $value;
+
+                @if map-has-key($breakpoints, $expression-to) {
+                    $expression-to: map-get($breakpoints, $expression-to);
+                }
+
+                $queries: append($queries, "and (max-width: #{$expression-to})", space);
+            } @else {
+                $queries: append($queries, "and (#{$key}: #{$value})", space);
+            }
+        }
+    }
+
+    @media #{$queries} {
+        @content;
+    }
+}
+
+@mixin visually-hidden {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(0 0 99.9% 99.9%);
+}
+
+@mixin line-clamp($line-height, $lines-to-show) {
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    height: ($line-height * $lines-to-show);
+    line-height: $line-height;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines-to-show;
+}

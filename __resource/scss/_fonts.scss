@@ -1,0 +1,27 @@
+@each $weight, $name in (100, 'Pretendard-Thin'),
+        (200, 'Pretendard-ExtraLight'),
+        (300, 'Pretendard-Light'),
+        (400, 'Pretendard-Regular'),
+        (500, 'Pretendard-Medium'),
+        (600, 'Pretendard-SemiBold'),
+        (700, 'Pretendard-Bold'),
+        (800, 'Pretendard-ExtraBold'),
+        (900, 'Pretendard Black') {
+    @font-face {
+        font-family: "Pretendard";
+        font-weight: $weight;
+        font-display: swap;
+        src: local(#{str-replace($name, '-', ' ')}), url("https://cdn.jsdelivr.net/npm/pretendard@1.3.6/dist/web/static/woff2/#{$name}.woff2") format('woff2');
+    }
+}
+
+@each $weight, $name in (300, 'GmarketSansLight'),
+        (500, 'GmarketSansMedium'),
+        (700, 'GmarketSansBold') {
+    @font-face {
+        font-family: "GmarketSans";
+        font-weight: $weight;
+        font-display: swap;
+        src: local(#{$name}), url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/#{$name}.woff") format('woff2');
+    }
+}
