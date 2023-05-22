@@ -320,7 +320,6 @@ body {
                             width: getSize(28px);
                             height: getSize(28px);
                             transform: translateY(-50%);
-                            background-color: #66c28f;
                             border: 1px solid #4c9b6e;
                             border-radius: 4px;
                             content:'';
@@ -343,6 +342,10 @@ body {
                     }
 
                     input[type="checkbox"]:checked + span {
+                        &::before {
+                            background-color: #66c28f;
+                        }
+
                         &::after {
                             opacity: 1;
                         }

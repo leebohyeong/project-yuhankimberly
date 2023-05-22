@@ -145,16 +145,12 @@ const app = () => {
         //별점 체크
         const reviewScore = findOne('.event-modal__contents form > div:nth-of-type(1) legend span', form);
 
-
-
         formScores.forEach((formScore, index) => {
             on(formScore, 'click', () => {
                 //console.log(formScore.value);
                 reviewScore.innerHTML = formScore.value;
             })
         })
-
-
 
         //글자수 제한
         document.addEventListener('keyup', (event) => {
@@ -173,7 +169,7 @@ const app = () => {
             }
         })
 
-        //check
+        //유효성검사
         const isValid = () => {
             if (formThemes.every(input => !input.checked)) {
                 alert('주제를 선택해 주세요.');
