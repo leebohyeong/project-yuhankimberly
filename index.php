@@ -18,7 +18,7 @@
     <header class="header">
         <div>
             <h1>
-                <a href="#">
+                <a href="#" class="header__logo">
                     <span>우리강산 푸르게 푸르게</span>
                 </a>
             </h1>
@@ -33,7 +33,7 @@
         </div>
     </header>
     <main class="main">
-        <section class="main__intro">
+        <section class="main__intro" id="main__intro">
             <div class="intro-carousel">
                 <div class="swiper">
                     <div class="swiper-wrapper">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </section>
-        <section class="main__event">
+        <section class="main__event" id="main__event">
             <div style="background-image: url(/assets/images/img_event_1.jpg)">
                 <p>
                     <a href="#eventModal" class="main__event-link">
@@ -92,21 +92,92 @@
                 </div>
             </div>
             <div style="background-image: url(/assets/images/img_event_2.jpg)"></div>
-        </section>
-        <section class="main__donation"></section>
-        <section class="main__story"></section>
+        </section >
+        <section class="main__donation" id="main__donation"></section>
+        <section class="main__story" id="main__story"></section>
         <div class="event-modal modal" id="eventModal">
             <div class="modal__backdrop"></div>
             <div class="modal__dialog modal-boost-us__dialog">
-                <div class="modal__container">
-                    <div class="modal__title">
+                <div class="modal__container event-modal__container">
+                    <div class="modal__title event-modal__title">
                         <img src="/assets/images/img_event_modal_title.png" alt="우리강산 푸르게 푸르게 39주년 반성문에 대한 별점과 한줄평 부탁드립니다!">
                     </div>
-                    <div class="moda__content">
-
-                        <p>
-                            <button type="button" class="modal__submit"></button>
-                        </p>
+                    <div class="moda__content event-modal__contents">
+                        <form name="" action="" method="post">
+                            <!-- 별점 -->
+                            <div>
+                                <fieldset>
+                                    <legend>내가 남긴 별점 <span>5</span>점</legend>
+                                    <div>
+                                        <input type="radio" name="score" value="5" id="score5"><label for="score5"></label>
+                                        <input type="radio" name="score" value="4" id="score4"><label for="score4"></label>
+                                        <input type="radio" name="score" value="3" id="score3"><label for="score3"></label>
+                                        <input type="radio" name="score" value="2" id="score2"><label for="score2"></label>
+                                        <input type="radio" name="score" value="1" id="score1"><label for="score1"></label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <!-- 한줄평 남기기 -->
+                            <div>
+                                <fieldset>
+                                    <legend>Q. 주제 선택 후 한줄평을 남겨주세요.</legend>
+                                    <div>
+                                        <label>
+                                            <input type="radio" name="theme" id="theme1" value="">
+                                            <span>후기 쓰기</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="theme" id="theme2">
+                                            <span>
+                                                숲 프로그램 <br>
+                                                아이디어 제안
+                                            </span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="theme" id="theme3">
+                                            <span>응원 남기기</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <div>
+                                    <textarea id="review" name="review" maxlength="150" placeholder="한줄평 남기기(150자 제한)"></textarea>
+                                    <p>
+                                        <span></span>
+                                        / 150
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- 이름 -->
+                            <div>
+                                <p>이름 *</p>
+                                <input type="text" name="name" placeholder="이름을 입력해 주세요.">
+                            </div>
+                            <!-- 휴대폰 번호 * -->
+                            <div>
+                                <p>휴대폰 번호 *</p>
+                                <input type="text" name="phone" placeholder="'-'없이 숫자만 입력해 주세요.">
+                            </div>
+                            <!-- 개인정보 수집 동의 -->
+                            <div>
+                                <p>개인정보 수집 동의</p>
+                                <div></div>
+                                <fieldset>
+                                    <div>
+                                        <label>
+                                            <input type="checkbox" name="agree1" id="">
+                                            <span>(필수) 만 14세 이상입니다</span>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="agree2" id="">
+                                            <span>(필수) 동의합니다</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <p>
+                                <button type="submit" class="modal__submit"></button>
+                            </p>
+                        </form>
                     </div>
                     <div class="modal__close">
                         <button class="modal__close-button" type="button"><span class="modal__close-text">닫기</span></button>
