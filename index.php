@@ -107,7 +107,7 @@
                             <!-- 별점 -->
                             <div>
                                 <fieldset>
-                                    <legend>내가 남긴 별점 <span>5</span>점</legend>
+                                    <legend>내가 남긴 별점 <span></span>점</legend>
                                     <div>
                                         <input type="radio" name="score" value="5" id="score5"><label for="score5"></label>
                                         <input type="radio" name="score" value="4" id="score4"><label for="score4"></label>
@@ -140,7 +140,7 @@
                                     </div>
                                 </fieldset>
                                 <div>
-                                    <textarea id="review" name="review" maxlength="150" placeholder="한줄평 남기기(150자 제한)"></textarea>
+                                    <textarea id="review" name="review" maxlength="150" placeholder="한줄평 남기기(150자 제한)">가나다라마바사아차기</textarea>
                                     <p>
                                         <span></span>
                                         / 150

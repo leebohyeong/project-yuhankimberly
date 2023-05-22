@@ -125,6 +125,14 @@ const app = () => {
         const mainEvent = findOne('.main__event');
         const triggers = findOne('.main__event-link', mainEvent);
         const getId = triggers.getAttribute('href');
+        const form = findOne('.event-modal form');
+        const formScores = find('[name="score"]', form);
+        const formThemes = find('[name="theme"]', form);
+        const formReview = findOne('[name="review"]', form);
+        const formName = findOne('[name="name"]', form);
+        const formPhone = findOne('[name="phone"]', form);
+        const formAgree1 = findOne('[name="agree1"]', form);
+        const formAgree2 = findOne('[name="agree2"]', form);
 
         triggers.addEventListener('click', (event) => {
             event.preventDefault();
@@ -133,6 +141,20 @@ const app = () => {
             const content = findOne(getId)
             modal.open(content);
         });
+
+        //별점 체크
+        const reviewScore = findOne('.event-modal__contents form > div:nth-of-type(1) legend span', form);
+
+
+
+        formScores.forEach((formScore, index) => {
+            on(formScore, 'click', () => {
+                //console.log(formScore.value);
+                reviewScore.innerHTML = formScore.value;
+            })
+        })
+
+
 
         //글자수 제한
         document.addEventListener('keyup', (event) => {
@@ -152,18 +174,42 @@ const app = () => {
         })
 
         //check
-        const form = findOne('.event-modal form');
-        const formTheme = find('[name="theme"]', form);
-        const formReview = findOne('[name="review"]', form);
-        const formName = findOne('[name="name"]', form);
-        const formPhone = findOne('[name="phone"]', form);
-        const formAgree1 = findOne('[name="agree1"]', form);
-        const formAgree2 = findOne('[name="agree2"]', form);
-
         const isValid = () => {
-            if (formTheme.every(input => !input.checked)) {
+            if (formThemes.every(input => !input.checked)) {
                 alert('주제를 선택해 주세요.');
-                formTheme[0].focus();
+                formThemes[0].focus();
+                return false;
+            }
+
+            if (!formReview.value.trim()) {
+                alert('한줄평은 최소 10자 이상입니다.');
+                formReview.focus();
+                return false;
+            }
+
+            if (!formName.value.trim()) {
+                if(!formName.value.length < 10) {
+                    alert('이름을 입력해주세요.');
+                    formName.focus();
+                    return false;
+                }
+            }
+
+            if (!formPhone.value.trim()) {
+                alert('연락처를 입력해주세요.');
+                formPhone.focus();
+                return false;
+            }
+
+            if (!formAgree1.checked) {
+                alert('개인정보 수집에 동의해 주세요.');
+                formAgree1.focus();
+                return false;
+            }
+
+            if (!formAgree2.checked) {
+                alert('개인정보 수집에 동의해 주세요.');
+                formAgree2.focus();
                 return false;
             }
 
