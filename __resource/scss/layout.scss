@@ -237,7 +237,7 @@ body {
                     textarea + p {
                         position: absolute;
                         right: getSize(50px);
-                        bottom: getSize(14px);
+                        bottom: getSize(20px);
                         color: #313131;
                         font-size: getSize(20px);
                     }
@@ -271,7 +271,7 @@ body {
                     overflow: hidden;
                     overflow-y: scroll;
                     width: 100%;
-                    height: getSize(100px);
+                    height: 100px;
                     padding: getSize(30px) getSize(15px);
                     border: 1px solid #d8d9d8;
                     color: #a9a9a9;
