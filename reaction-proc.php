@@ -27,10 +27,11 @@ if($validator->validate()) {
 
 // form params
 $formInfo           = array(
-    'category'         => $_POST['category'] ?? '',          // TOP 여부
-    'username'    => $_POST['username'] ?? '',        // 노출 여부
-    'userphone'           => $_POST['userphone'] ?? '',      // 구분
-    'content'            => $_POST['content'] ?? ''                // 등록 관리자 아이디
+    'score' => $_POST['score'] ?? '',
+    'category'         => $_POST['theme'] ?? '',          // theme
+    'username'    => $_POST['name'] ?? '',        // name
+    'userphone'           => $_POST['phone'] ?? '',      // phone
+    'content'            => $_POST['review'] ?? ''                // review
 );
 
 // validation

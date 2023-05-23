@@ -103,7 +103,7 @@
                         <img src="/assets/images/img_event_modal_title.png" alt="우리강산 푸르게 푸르게 39주년 반성문에 대한 별점과 한줄평 부탁드립니다!">
                     </div>
                     <div class="moda__content event-modal__contents">
-                        <form name="" action="" method="post">
+                        <form name="frm" action="/reaction-proc.php" method="post">
                             <!-- 별점 -->
                             <div>
                                 <fieldset>
