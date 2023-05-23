@@ -1,0 +1,20 @@
+{
+  "config": {
+    "vendor-dir": "../vendor"
+  },
+  "require":{
+    "maximebf/debugbar": "1.*",
+    "phpoffice/phpspreadsheet": "^1.28",
+    "ext-pdo": "*",
+    "ext-mbstring": "*",
+    "gilbitron/easycsrf" : "1.5.1",
+    "phpmailer/phpmailer": "~6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Groupidd\\": "../src/Groupidd/"
+    },
+    "files": ["../src/config.php"]
+
+  }
+}
