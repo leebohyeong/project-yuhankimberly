@@ -4,14 +4,6 @@ import Swiper, {Autoplay, Navigation, Pagination } from 'swiper';
 Swiper.use([Navigation, Pagination]);
 
 const app = () => {
-    //ScrollHeader
-    (() => {
-        const header = findOne('.header');
-        // const headerInitClassName = 'header--main-init';
-        // const scrollHeader = () => header.classList[window.scrollY < header.clientHeight ? 'add' : 'remove'](headerInitClassName);
-        //
-        // on(window, 'scroll', scrollHeader);
-    })();
 
     //ScrollSpy
     (() => {
@@ -119,6 +111,26 @@ const app = () => {
         );
     })();
 
+    //main event reaction
+    (() => {
+        const mainEvent = findOne('.main__event');
+        const numberCases = findOne('p strong', mainEvent);
+        const numberCasesInner = numberCases.innerHTML;
+        const numberCasesGauge = findOne('p > span', mainEvent);
+
+
+        const getReactionGauge = () => {
+            if(!numberCasesInner == '') {
+                numberCasesGauge.style.width = `calc(${numberCasesInner} / 10000 * 100%)`
+            } else {
+                numberCases.innerHTML = '0';
+            }
+        };
+
+        on(window, 'load', getReactionGauge);
+
+    })();
+
     //리액션 event
     (() => {
         const modal = new Modal();
@@ -130,7 +142,9 @@ const app = () => {
         const formThemes = find('[name="theme"]', form);
         const formReview = findOne('[name="review"]', form);
         const formName = findOne('[name="name"]', form);
+        const formNameCheck = /^[가-힣a-zA-Z]+$/;
         const formPhone = findOne('[name="phone"]', form);
+        const formPhoneCheck = /^[0-9]+$/;
         const formAgree1 = findOne('[name="agree1"]', form);
         const formAgree2 = findOne('[name="agree2"]', form);
 
@@ -138,6 +152,7 @@ const app = () => {
             event.preventDefault();
 
             form.reset()
+            reviewScore.innerHTML = "0";
             const content = findOne(getId)
             modal.open(content);
         });
@@ -169,7 +184,7 @@ const app = () => {
             }
         })
 
-        //유효성검사
+        //form 유효성검사
         const isValid = () => {
             if (formThemes.every(input => !input.checked)) {
                 alert('주제를 선택해 주세요.');
@@ -177,22 +192,32 @@ const app = () => {
                 return false;
             }
 
-            if (!formReview.value.trim()) {
+            if (formReview.value.trim().length < 10) {
                 alert('한줄평은 최소 10자 이상입니다.');
                 formReview.focus();
                 return false;
             }
 
             if (!formName.value.trim()) {
-                if(!formName.value.length < 10) {
-                    alert('이름을 입력해주세요.');
-                    formName.focus();
-                    return false;
-                }
+                alert('이름을 입력해주세요.');
+                formName.focus();
+                return false;
+            }
+
+            if (!formNameCheck.test(formName.value.trim())) {
+                alert('이름을 정확하게 입력해주세요.');
+                formName.focus();
+                return false;
             }
 
             if (!formPhone.value.trim()) {
                 alert('연락처를 입력해주세요.');
+                formPhone.focus();
+                return false;
+            }
+
+            if (!formPhoneCheck.test(formPhone.value.trim())) {
+                alert('연락처를 정확하게 입력해주세요.');
                 formPhone.focus();
                 return false;
             }
@@ -216,31 +241,11 @@ const app = () => {
             event.preventDefault();
 
             if (isValid()) {
-                // const formData = new FormData(form);
-
-                // fetch(form.action, {
-                //     method: form.method,
-                //     body: formData
-                // })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         if (data.result === false){
-                //             alert(data.message);
-                //         }else{
-                //             alert(data.message);
-                //         }
-                //     })
-                //     .catch(error => {
-                //         console.error(error);
-                //     });
+                modal.close();
             }
-
         });
 
-
-
     })();
-
 
 }
 

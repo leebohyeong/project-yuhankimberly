@@ -66,11 +66,11 @@
                 </div>
                 <div class="intro-tab__contents">
                     <div class="intro-tab__nav-link--active" style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                    <div style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_2.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_3.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_4.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_5.jpg)"></div>
+                    <div style="background-image: url(/assets/images/img_intro_tab_contents_6.jpg)"></div>
                 </div>
             </div>
         </section>
@@ -83,15 +83,15 @@
                 </p>
             </div>
             <div>
+                <p>
+                    <strong>3500</strong>건
+                </p>
                 <div>
-                    <p>
-                        <strong>1,983</strong>건
-                    </p>
-                    <p>1만건 달성</p>
-                    <p></p>
+                    <p><span></span></p>
                 </div>
             </div>
             <div style="background-image: url(/assets/images/img_event_2.jpg)"></div>
+            <div style="background-image: url(/assets/images/img_event_3.jpg)"></div>
         </section >
         <section class="main__donation" id="main__donation"></section>
         <section class="main__story" id="main__story"></section>
@@ -107,7 +107,7 @@
                             <!-- 별점 -->
                             <div>
                                 <fieldset>
-                                    <legend>내가 남긴 별점 <span></span>점</legend>
+                                    <legend>내가 남긴 별점 <span>0</span>점</legend>
                                     <div>
                                         <input type="radio" name="score" value="5" id="score5"><label for="score5"></label>
                                         <input type="radio" name="score" value="4" id="score4"><label for="score4"></label>
@@ -140,7 +140,7 @@
                                     </div>
                                 </fieldset>
                                 <div>
-                                    <textarea id="review" name="review" maxlength="150" placeholder="한줄평 남기기(150자 제한)">가나다라마바사아차기</textarea>
+                                    <textarea id="review" name="review" maxlength="150" placeholder="한줄평 남기기(150자 제한)"></textarea>
                                     <p>
                                         <span></span>
                                         / 150
@@ -160,7 +160,49 @@
                             <!-- 개인정보 수집 동의 -->
                             <div>
                                 <p>개인정보 수집 동의</p>
-                                <div></div>
+                                <div>
+                                    <p>&lt;개인정보 수집 및 이용에 관한 안내&gt;</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>이벤트 중복참여여부 확인, 당첨자 선정 및 안내, 경품 발송을 위해 이벤트 참가자의 개인정보를 수집하고 있습니다.</p>
+                                    <p>입력해주신 개인정보는 이벤트 중복참여여부 확인, 당첨자 선정 및 안내, 경품 발송, 마케팅 활용 목적 외 다른 용도로 사용되지 않으며, 당사가 수집한 개인정보는 아래와 같이 처리됩니다.</p>
+                                    <p>내용을 자세히 읽어 보신 후 동의 여부를 결정하여 주시기 바랍니다.</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>1. 수집하는 개인정보의 항목:</p>
+                                    <p>이름, 휴대폰 번호</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>2. 개인정보의 수집 및 이용 목적:</p>
+                                    <p>이벤트 참여여부 확인, 당첨자 선정 및 안내, 경품 발송, 마케팅 활용</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>3. 개인정보의 보유 및 이용 기간:</p>
+                                    <p>이벤트 종료일로부터 3개월까지 보유, 이후 일괄 폐기</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>※ 위와 같이 개인정보를 수집 · 이용하는데 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우, 이벤트 참여에 제한을 받으실 수 있습니다.</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>&lt;개인정보 관련 처리 업무 위탁 안내&gt;</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>이벤트 참가자가 요청한 서비스를 제공하기 위해서 아래와 같이 개인정보를 위탁하고 있습니다.</p>
+                                    <p>1. 위탁 업체: ㈜그룹아이디디</p>
+                                    <p>2. 위탁업무 내용:</p>
+                                    <p>이벤트 진행 및 당첨자 발표를 위한 개인정보수집</p>
+                                    <p>
+                                        <br>
+                                    </p>
+                                    <p>※ 상기 업체 이외의 수탁자를 통해 이벤트 행사가 진행될 경우, 해당 이벤트 참여 신청 페이지를 통해 개인정보 처리 위탁에 대한 변경사항을 안내하도록 하겠습니다.</p>
+                                </div>
                                 <fieldset>
                                     <div>
                                         <label>
