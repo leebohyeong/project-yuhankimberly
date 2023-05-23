@@ -237,8 +237,8 @@ const app = () => {
             return true;
         }
 
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
+        form.addEventListener('submit', () => {
+            // event.preventDefault();
 
             if (isValid()) {
                 // modal.close();
