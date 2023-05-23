@@ -171,12 +171,14 @@
                 }
 
                 > div {
+                    width: min(100% - 40px, 640px);
+                    margin: 0 auto;
                     padding-top: 29px;
-                    background: url(/assets/images/img_event_text.png) no-repeat right 40px top;
+                    background: url(/assets/images/img_event_text.png) no-repeat right top;
 
                     p {
                         position: relative;
-                        width: min(100% - 40px, 640px);
+                        width: 100%;
                         height: getSize(40px);
                         margin: 0 auto;
                         background-color: rgb(#94d62b, .2);
