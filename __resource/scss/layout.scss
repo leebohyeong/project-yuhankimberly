@@ -9,8 +9,16 @@ body {
 .header {
     position: sticky;
     top: 0;
-    background-color: #222;
+    background-color: #fff;
     z-index: 100;
+
+    &--main-init {
+        background-color: #222;
+
+        .header__logo {
+            background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
+        }
+    }
 
     > div {
         display: flex;
@@ -19,13 +27,11 @@ body {
         padding: getSize(34px) getSize(40px) 0;
     }
 
-    h1 {
-        a {
-            display: block;
-            width: getSize(103px);
-            height: getSize(30px);
-            background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
-        }
+    &__logo {
+        display: block;
+        width: getSize(103px);
+        height: getSize(30px);
+        background: url(/assets/images/img_logo_color.png) no-repeat center/cover;
 
         span {
             @include visually-hidden;
@@ -85,6 +91,267 @@ body {
 
         span {
             @include visually-hidden;
+        }
+    }
+}
+
+.event-modal {
+    fieldset {
+        padding: 0;
+        border: 0;
+
+        legend {
+            text-align: center;
+        }
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        border: 1px solid #d8d9d8;
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    form {
+        > div {
+            &:nth-of-type(1) {
+                fieldset {
+                    padding-bottom: getSize(34px);
+
+                    & > div {
+                        display: flex;
+                        flex-direction: row-reverse;
+                        align-items: center;
+                        justify-content: center;
+                        column-gap: getSize(10px);
+                    }
+                }
+
+                legend {
+                    padding: getSize(38px) 0 getSize(15px);
+                    color: #c0c0c0;
+                    font-size: getSize(26px);
+                    
+                    span {
+                        color: #8cd325;
+                    }
+                }
+
+                label {
+                    cursor: pointer;
+                    display: block;
+                    width: getSize(53px);
+                    height: getSize(50px);
+                    background: url(/assets/images/icon_star.png) no-repeat center/cover;
+                }
+
+                input[type=radio] {
+                    display: none;
+                }
+
+                input[type=radio]:checked ~ label {
+                    background-image: url(/assets/images/icon_star_active.png);
+                }
+
+            }
+
+            &:nth-of-type(2) {
+                border-top: 1px solid #d8d9d8;
+
+                fieldset {
+                    legend {
+                        padding-top: getSize(27px);
+                        color: #434343;
+                        font-weight: $font-weight-semiBold;
+                        font-size: getSize(26px);
+                    }
+
+                    & > div {
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        column-gap: getSize(70px);
+                        padding-top: getSize(27px);
+                        text-align: center;
+                    }
+
+                    input[type="radio"] {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        appearance: none;
+                        position: relative;
+                        width: getSize(28px);
+                        height: getSize(28px);
+                        margin: 0 auto;
+                        border: 1px solid #bfbfbf;
+                        border-radius: 50%;
+
+                        &::after {
+                            opacity: 0;
+                            display: block;
+                            width: getSize(16px);
+                            height: getSize(16px);
+                            background-color: #222;
+                            border-radius: 50%;
+                            content:'';
+                        }
+                    }
+
+                    input[type="radio"]:checked {
+                        border-color: #222;
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+
+                    label {
+                        cursor: pointer;
+                    }
+
+                    span {
+                        display: block;
+                        padding-top: getSize(18px);
+                        color: #313131;
+                        font-size: getSize(24px);
+                        line-height: math.div(30, 24);
+                    }
+                }
+
+                fieldset + div {
+                    position: relative;
+                    margin-top: getSize(30px);
+
+                    textarea {
+                        height: getSize(140px);
+                        resize: none;
+                    }
+
+                    textarea::placeholder {
+                        padding: getSize(25px) 0 0 getSize(28px);
+                        font-size: getSize(24px);
+                        color: #a9a9a9;
+                    }
+
+                    textarea + p {
+                        position: absolute;
+                        right: getSize(50px);
+                        bottom: getSize(14px);
+                        color: #313131;
+                        font-size: getSize(20px);
+                    }
+                }
+
+            }
+
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5) {
+                margin-top: getSize(30px);
+
+                input[type="text"] {
+                    height: getSize(64px);
+                    padding: 0 10px;
+                }
+
+                input[type="text"]::placeholder {
+                    padding-left: getSize(28px);
+                    font-size: getSize(24px);
+                    color: #a9a9a9;
+                }
+
+                > p {
+                    padding-bottom: getSize(14px);
+                    color: #313131;
+                    font-size: getSize(24px);
+                }
+
+                > p + div {
+                    overflow: hidden;
+                    overflow-y: scroll;
+                    width: 100%;
+                    height: getSize(100px);
+                    padding: getSize(30px) getSize(15px);
+                    border: 1px solid #d8d9d8;
+                    color: #a9a9a9;
+                    font-size: getSize(18px);
+                    
+                    > * {
+                        color: #a9a9a9;
+                        font-size: getSize(18px);
+                        line-height: math.div(26, 18);
+                    }
+                }
+
+                > p + div + fieldset {
+                    margin-top: getSize(25px);
+
+                    & > div {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        column-gap: getSize(53px);
+
+                        @include media-queries($to: xs) {
+                            column-gap: 20px;
+                        }
+                    }
+
+                    label {
+                        position: relative;
+                    }
+
+                    span {
+                        cursor: pointer;
+                        position: relative;
+                        padding-left: getSize(50px);
+                        color: #535353;
+                        font-size: getSize(22px);
+
+                        @include media-queries($to: xs) {
+                            padding-left: 18px;
+                        }
+
+                        &::before {
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            width: getSize(28px);
+                            height: getSize(28px);
+                            transform: translateY(-50%);
+                            border: 1px solid #4c9b6e;
+                            border-radius: 4px;
+                            content:'';
+                        }
+
+                        &::after {
+                            opacity: 0;
+                            position: absolute;
+                            top: 25%;
+                            left: 2px;
+                            width: getSize(19px);
+                            height: getSize(14px);
+                            background: url(/assets/images/icon_checked.png) no-repeat center/cover;
+                            content:'';
+                        }
+                    }
+
+                    input[type="checkbox"] {
+                        display: none;
+                    }
+
+                    input[type="checkbox"]:checked + span {
+                        &::before {
+                            background-color: #66c28f;
+                        }
+
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
         }
     }
 }

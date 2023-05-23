@@ -42,10 +42,14 @@
         max-width: 700px;
         width: calc(100% - 40px);
         margin: 0 auto;
-        padding: getSize(52px) getSize(44px);
+        padding: getSize(52px) getSize(50px);
         background: #fff;
         box-sizing: border-box;
         pointer-events: auto;
+
+        @include media-queries($to: xs) {
+            padding: getSize(52px) 10px;
+        }
     }
 
     &__title{
@@ -60,7 +64,7 @@
         display: block;
         width: getSize(336px);
         height: getSize(84px);
-        margin: 0 auto;
+        margin: getSize(40px) auto 0;
         background: transparent url(/assets/images/img_event_modal_button.jpg) no-repeat center/cover;
         border: none;
     }
