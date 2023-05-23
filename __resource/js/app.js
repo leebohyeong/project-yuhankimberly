@@ -241,7 +241,7 @@ const app = () => {
             event.preventDefault();
 
             if (isValid()) {
-                modal.close();
+                // modal.close();
             }
         });
 
