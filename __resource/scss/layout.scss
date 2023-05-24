@@ -1,14 +1,25 @@
 @use "sass:math";
 
-
 body {
     width: 100%;
     background-color: #fff;
     
-    > div {
+    .container {
         max-width: var(--main-section-width);
         margin: 0 auto;
     }
+}
+
+.intro {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 720px;
+    height: 100vh;
+    background: url(/assets/images/img_loading.jpg) no-repeat center/cover;
+    transform: translateX(-50%);
+    z-index: 1000;
 }
 
 .header {
