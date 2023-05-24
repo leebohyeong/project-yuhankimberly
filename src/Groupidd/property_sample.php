@@ -23,9 +23,9 @@ COOKIE_SECURE    = 0
 [DB]
 ; 개발기 : 119.207.79.180, 운영기 :
 DB_HOST         = "119.207.79.187"
-DB_USER         = "groupiddkkg"
-DB_PASSWORD     = "YuhanKkg!%^"
-DB_NAME         = "YUHAN_202306"
+DB_USER         = "eventkkg"
+DB_PASSWORD     = "Yuhankkg!%^"
+DB_NAME         = "YUHANEVENT_202306"
 DB_ENCODING     = "utf8"
 
 [ENCRYPT]
