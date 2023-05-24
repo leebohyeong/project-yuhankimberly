@@ -5,16 +5,16 @@ import Swiper, {Autoplay, Navigation, Pagination} from 'swiper';
 Swiper.use([Navigation, Pagination]);
 
 const app = () => {
-
     //ScrollSpy
     (() => {
         const header = findOne('.header');
-        const headerHeight = header.clientHeight;
 
+        const headerHeight = header.clientHeight;
         const headerInitClassName = 'header--main-init';
         const scrollHeader = () => header.classList[window.scrollY < header.clientHeight ? 'add' : 'remove'](headerInitClassName);
 
         const links = find('.header__link', header);
+        const bannerLinks = find('.intro-carousel a');
         const sections = links.map(link => findOne(link.getAttribute('href')));
         const sectionsStart = [];
         const getSectionsStart = () => sections.forEach((section, index) => sectionsStart[index] = ~~(getOffset(section).top - headerHeight));
@@ -42,7 +42,6 @@ const app = () => {
         getSectionsStart();
 
         links.forEach((link, index) => {
-
             on(link, 'click', (event) => {
                 event.preventDefault();
                 if (index !== 2 && index !== 3) {
@@ -52,8 +51,20 @@ const app = () => {
                     alert('Coming Soon');
                 }
             });
-
         });
+
+        bannerLinks.forEach((bannerLink, index) => {
+            on(bannerLink, 'click', (event) => {
+                event.preventDefault();
+
+                if (index !== 2 && index !== 3) {
+                    moveSection(index);
+                    toggleLink();
+                } else {
+                    alert('Coming Soon');
+                }
+            })
+        })
 
         on(window, 'load', getSectionsStart);
         on(window, 'resize', getSectionsStart);
@@ -240,6 +251,44 @@ const app = () => {
                 form.submit();
             }
         });
+
+    })();
+
+    //intro
+    (() => {
+        const intro = findOne('.intro');
+        const introUrl = new URLSearchParams(location.search);
+
+        const getIntroUrlValue = introUrl.get('qr');
+        // const introUrlCheck = introUrl.has('qr');
+
+        if(!getIntroUrlValue) {
+            intro.style.display = 'none'
+        } else {
+            const headerHeight = findOne('.header').clientHeight;
+            const tabList = findOne('.intro-tab');
+            const tabListTop = getOffset(tabList).top;;
+            const tabLink = find('.intro-tab__nav-link')[getIntroUrlValue-1];
+            const image = new Image();
+
+            const moveSection = () => {
+                window.scroll({
+                    top: tabListTop - headerHeight,
+                    behavior: 'smooth'
+                });
+            }
+
+            moveSection();
+            tabLink.click();
+
+            image.onload = function() {
+                setTimeout(() => {
+                    intro.style.display = 'none'
+                }, 5000)
+            };
+            image.src = "/assets/images/img_loading.jpg";
+
+        }
 
     })();
 

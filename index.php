@@ -15,7 +15,8 @@
     <script src="/assets/js/app.js"></script>
 </head>
 <body>
-    <div>
+    <div class="intro"></div>
+    <div class="container">
         <header class="header header--main-init">
             <div>
                 <h1>
@@ -57,12 +58,12 @@
                 <div class="intro-tab">
                     <div class="intro-tab__nav">
                         <ul role="tablist">
-                            <li><a href="#" class="intro-tab__nav-link intro-tab__nav-link--active">부족했던 우리 이야기</a></li>
-                            <li><a href="#" class="intro-tab__nav-link">멸종위기종에게</a></li>
-                            <li><a href="#" class="intro-tab__nav-link">산불 피해 후유증</a></li>
-                            <li><a href="#" class="intro-tab__nav-link">사라진 숲아 미안해</a></li>
-                            <li><a href="#" class="intro-tab__nav-link">2030세대에게</a></li>
-                            <li><a href="#" class="intro-tab__nav-link">학교숲의 졸업</a></li>
+                            <li><a href="#" id="#intro-tab-contents1" class="intro-tab__nav-link intro-tab__nav-link--active">부족했던 우리 이야기</a></li>
+                            <li><a href="#" id="#intro-tab-contents2" class="intro-tab__nav-link">멸종위기종에게</a></li>
+                            <li><a href="#" id="#intro-tab-contents3" class="intro-tab__nav-link">산불 피해 후유증</a></li>
+                            <li><a href="#" id="#intro-tab-contents4" class="intro-tab__nav-link">사라진 숲아 미안해</a></li>
+                            <li><a href="#" id="#intro-tab-contents5" class="intro-tab__nav-link">2030세대에게</a></li>
+                            <li><a href="#" id="#intro-tab-contents6" class="intro-tab__nav-link">학교숲의 졸업</a></li>
                         </ul>
                     </div>
                     <div class="intro-tab__contents">
