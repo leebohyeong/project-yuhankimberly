@@ -254,7 +254,7 @@ $db->init();
 //$db->insert($insertInfo);
 //$db->close();
 
-$return_url = "/sitemanager/manager/mypage/mypage.php";
+$return_url = "/sitemanager/board/faq/faq-list.php";
 
 // response
 $response['message']    = '로그인 성공';

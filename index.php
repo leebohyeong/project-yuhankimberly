@@ -124,18 +124,18 @@
                                         <legend>Q. 주제 선택 후 한줄평을 남겨주세요.</legend>
                                         <div>
                                             <label>
-                                                <input type="radio" name="theme" id="theme1" value="">
+                                                <input type="radio" name="theme" id="theme1" value="후기 쓰기">
                                                 <span>후기 쓰기</span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="theme" id="theme2">
+                                                <input type="radio" name="theme" id="theme2" value="숲 프로그램 아이디어 제안">
                                                 <span>
                                                     숲 프로그램 <br>
                                                     아이디어 제안
                                                 </span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="theme" id="theme3">
+                                                <input type="radio" name="theme" id="theme3" value="응원 남기기">
                                                 <span>응원 남기기</span>
                                             </label>
                                         </div>

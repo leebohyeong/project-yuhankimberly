@@ -20,15 +20,18 @@ $formInfo           = array(
     'userphone'           => $_POST['phone'] ?? '',      // phone
     'content'            => $_POST['review'] ?? ''                // review
 );
-
+$uname = $formInfo['username'];
 // validation
 $validator = new Validator($formInfo);
+$validator->rule('required', 'score');
 $validator->rule('required', 'category');
 $validator->rule('required', 'username');
 $validator->rule('required', 'userphone');
 $validator->rule('required', 'content');
 if( $validator->validate()) {       					// validation 성공
     $formInfo 				= $validator->data(); 		// 데이터 받아오기
+    $formInfo['username'] = CommonFunc::stringEncrypt($formInfo['username'], $ENCRYPT_KEY_);
+    $formInfo['userphone'] = CommonFunc::stringEncrypt($formInfo['userphone'], $ENCRYPT_KEY_);
     $formInfo['is_adult'] = 'Y';
     $formInfo['is_agree'] = 'Y';
 } else {               									// validation 실패
@@ -55,7 +58,7 @@ if($listCnt>0){
         //commit
         $db->executeTransaction();
         $db->close();
-        CommonFunc::jsAlert($formInfo['username'].'님의 리액션 참여가 완료되었습니다.','location.href="index.php";');
+        CommonFunc::jsAlert($uname.'님의 리액션 참여가 완료되었습니다.','location.href="index.php";');
     }else{
         //rollBack
         $db->rollBack();

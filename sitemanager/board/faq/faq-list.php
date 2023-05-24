@@ -51,37 +51,16 @@ if ($requestInfo['from_date'] != '' && $requestInfo['to_date'] != '') {
 if (!empty($requestInfo['search_is_view'])){
     $db->where('is_view', $requestInfo['search_is_view']);
 }
-$db->where('is_del', 'N');
 // paging setting
 $listCnt        = $db->getCountAll();
-$perPage        = 10;
+$perPage        = 20;
 $pageSize       = ceil($listCnt/$perPage);
 $currentPage    = ($page-1) * $perPage;
 
-$db->select("seq, order_num, category, content, view_cnt_w, view_cnt_m, reg_date, is_view, is_top", true);
-$db->orderby('is_top', 'desc');
-$db->orderby('order_num');
+$db->select("seq, score, category, content, username, userphone, reg_date", true);
 $db->orderby('seq', 'desc');
 $db->limit($perPage, $currentPage );
 $result = $db->getAll();
-
-$db->init();
-$db->select('seq, content');
-$db->where('is_del', 'N');
-$db->orderby('order_num');
-$db->orderby('seq', 'desc');
-$orderNumResult = $db->getAll();
-
-$db->init();
-$db->select('category, name');
-$db->from('COMMON_CODE');
-$db->where('code_usage', 'FAQ');
-$db->where('is_view', 'Y');
-$db->orderby('seq','DESC');
-$db->orderby('order_num');
-$faqCategoryResult = $db->getAll();
-
-CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', "{$ADMIN_ID_}님이 고객센터FAQ 리스트를 조회하셨습니다.");
 
 ?>
 <!DOCTYPE html>
@@ -97,9 +76,9 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
         <ul>
             <li>게시판</li>
         </ul>
-        <h2>고객센터 FAQ</h2>
+        <h2>리액션 참가자</h2>
     </headder>
-    <form name="frm_search" class="search">
+    <form name="frm_search" class="search" style="display: none">
         <input type="hidden" name="page" value="<?=$page?>"/>
         <div>
             <div>
@@ -119,16 +98,6 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
                 <div>구분</div>
                 <div>
                     <div class="select-input-group">
-                        <select name="search_category" id="" class="form-input width-100">
-                            <option value="">전체</option>
-                            <?php
-                            foreach ($faqCategoryResult as $row) {
-                                ?>
-                                <option value="<?=$row['category']?>" <?=CommonFunc::getSelected($row['category'], $requestInfo['search_category'])?>><?=$row['name']?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -177,14 +146,10 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
         <div class="top-group">
             <p>총 <?=number_format($listCnt)?>건이 검색되었습니다.</p>
             <div>
-                <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#sortingModal">노출순서 변경</button>
-                <button type="button" class="button" data-btn="eventBtn" data-fn=topon>TOP등록</button>
-                <button type="button" class="button" data-btn="eventBtn" data-fn="topoff">TOP해지</button>
-                <button type="button" class="button button--blue" data-btn="eventBtn" data-fn="register">등록</button>
+                <button type="button" class="button red" data-btn="eventBtn" data-fn="excel">엑셀 다운로드</button>
             </div>
         </div>
         <form name="frm" action="/sitemanager/board/faq/faq-del-hide-proc.php" method="post">
-            <input type="hidden" name="csrf_token" value="<?php echo $CSRF_TOKEN_; ?>">
             <input type="hidden" name="page" value="<?=$requestInfo['page']?>">
             <input type="hidden" name="search" value="<?=$requestInfo['search']?>">
             <input type="hidden" name="findword" value="<?=$requestInfo['findword']?>">
@@ -195,62 +160,47 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
             <input type="hidden" name="topon">
             <table class="table">
                 <colgroup>
-                    <col width="3%">
                     <col width="5%">
-                    <col width="10%">
+                    <col width="7%">
+                    <col width="19%">
                     <col width="*%">
                     <col width="15%">
-                    <col width="14%">
-                    <col width="5%">
+                    <col width="15%">
                 </colgroup>
                 <thead>
                     <tr>
-                        <th><input type="checkbox" name="select"></th>
-                        <th>노출순서</th>
-                        <th>구분</th>
-                        <th>제목</th>
-                        <th>조회수 (PC/MO/Total)</th>
+                        <th>No</th>
+                        <th>별점</th>
+                        <th>주제</th>
+                        <th>한줄평</th>
+                        <th>이름</th>
                         <th>등록일</th>
-                        <th>노출여부</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                 if($listCnt > 0){
                     foreach ($result as $idx=>$row) {
-                        switch ($row['category']){
-                            case 'A': $category = '제품'; break;
-                            case 'B': $category = '포인트'; break;
-                            case 'C': $category = '회원'; break;
-                            case 'D': $category = '기타'; break;
-                        }
-                        if($row['is_top']=='Y'){
-                            $rownum = 'TOP';
-                        }else{
-                            $rownum = $row['order_num'];
-                        }
+                        $rownum = $listCnt-($idx+$currentPage);
                         ?>
                         <tr>
-                            <td>
-                                <input type="checkbox" name="select_seq[]" value="<?=$row['seq']?>">
-                            </td>
                             <td>
                                 <?=$rownum?>
                             </td>
                             <td>
-                                <?=$category?>
+                                <?=$row['score']?>
                             </td>
                             <td>
-                                <a href="faq-modify.php?seq=<?=$row['seq'].'&'.http_build_query($requestInfo) ?>"><?=$row['content']?></a>
+                                <?=$row['category']?>
                             </td>
                             <td>
-                                <?=$row['view_cnt_w']?>/<?=$row['view_cnt_m']?>/<?=$row['view_cnt_w']+$row['view_cnt_m']?>
+                                <?=$row['content']?>
+                            </td>
+                            <td>
+                                <?=CommonFunc::stringDecrypt($row['username'], $ENCRYPT_KEY_)?>
                             </td>
                             <td>
                                 <?=date('Y-m-d', strtotime($row['reg_date']))?>
-                            </td>
-                            <td>
-                                <?=$row['is_view']?>
                             </td>
                         </tr>
                         <?php
@@ -261,13 +211,6 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
             </table>
 
             <div class="bottom-group">
-                <div class="select-input-group">
-                    <select name="del_hide_select" id="" class="form-input width-100">
-                        <option value="delete">삭제</option>
-                        <option value="hide">숨김</option>
-                    </select>
-                </div>
-                <button type="button" class="button button--blue" data-btn="eventBtn" data-fn="del_hide">적용</button>
             </div>
 
             <nav class="pagination">
@@ -277,106 +220,15 @@ CommonFunc::history_proc($ADMIN_ID_, $USER_IP_, '게시판', '고객센터FAQ', 
     </div>
 </section>
 
-<div id="sortingModal" class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="sorting-list">
-                <form method="post" action="faq-order-change-proc.php">
-                    <input type="hidden" name="csrf_token" value="<?php echo $CSRF_TOKEN_; ?>">
-                    <input type="hidden" name="page" value="<?=$requestInfo['page']?>">
-                    <input type="hidden" name="search" value="<?=$requestInfo['search']?>">
-                    <input type="hidden" name="findword" value="<?=$requestInfo['findword']?>">
-                    <input type="hidden" name="search_category" value="<?=$requestInfo['search_category']?>">
-                    <input type="hidden" name="from_date" value="<?=$requestInfo['from_date']?>">
-                    <input type="hidden" name="to_date" value="<?=$requestInfo['to_date']?>">
-                    <input type="hidden" name="search_is_view" value="<?=$requestInfo['search_is_view']?>">
-                    <h3>순서 변경</h3>
-                    <p>* 드래그 앤 드롭 사용</p>
-                    <ul>
-                        <?php
-                        foreach($orderNumResult as $key => $row2){
-                        ?>
-                        <li data-sorting-id="<?=$key?>">
-                            <input type="hidden" name="seq[]" value="<?=$row2['seq']?>">
-                            <?=$row2['content']?>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
-                    <p>
-                        <button class="button button--primary" type="submit">저장</button>
-                    </p>
-                </form>
-            </div>
-            <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
 
 <script>
     const EventListFn = {
-        register: function () {
-            location.href = "/sitemanager/board/faq/faq-register.php?<?=http_build_query($requestInfo)?>";
-        },
-        topon: function (){
-            if ($('input[name="select_seq[]"]:checked').length <= 0) {
-                alert("TOP 설정할 질문을 선택해 주세요.");
-                return false;
-            }
-            if(confirm("TOP 설정 하시겠습니까?")){
-                $("[name='topon']").val('on');
-                $("[name='frm']").attr("action","/sitemanager/board/faq/faq-top-proc.php").submit();
-            }
-        },
-        topoff: function (){
-            if ($('input[name="select_seq[]"]:checked').length <= 0) {
-                alert("TOP 해지할 질문을 선택해 주세요.");
-                return false;
-            }
-            if(confirm("TOP 해지 하시겠습니까?")){
-                $("[name='topon']").val('off');
-                $("[name='frm']").attr("action","/sitemanager/board/faq/faq-top-proc.php").submit();
-            }
-        },
-        del_hide: function () {
-            const massege = $('select[name="del_hide_select"] option:selected').text();
-            if ($('input[name="select_seq[]"]:checked').length <= 0) {
-                alert(massege+"할 질문을 선택해 주세요.");
-                return false;
-            }
-            if(confirm(massege+"처리 하시겠습니까?")){
-                //$("[name='frm']").attr("action","/sitemanager/board/faq/faq-del-hide-proc.php");
-                $("[name='frm']").submit();
-            }
+        excel: function () {
+            location.href = "excel.php";
         }
     }
 
-    $(function () {
-        $('[name=select]').on('click', function () {
-            if ($(this).prop("checked")) {
-                $("[name='select_seq[]']").prop("checked", true);
-            } else {
-                $("[name='select_seq[]']").prop("checked", false);
-            }
-        })
-    });
 
-    // 노출순서 변경
-    (() => {
-        const sortingModal = document.getElementById('sortingModal');
-        const sortingList = sortingModal.querySelector('.sorting-list ul');
-        let sorting = new Sortable(sortingList, {
-            animation: 150,
-            dataIdAttr: 'data-sorting-id',
-        });
-        const originSorted = sorting.toArray();
-        sortingModal.addEventListener('show.bs.modal', () => {
-            if (sorting) {
-                sorting.sort(originSorted, false);
-            }
-        });
-    })();
 </script>
 <?php require_once $ROOT_PATH_.'/sitemanager/assets/include/footer.php'; ?>
 </body>
