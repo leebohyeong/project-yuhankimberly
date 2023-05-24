@@ -11,19 +11,6 @@ use \Groupidd\Model\ModelBase;
 use \Groupidd\Common\CommonFunc;
 use \Groupidd\Library\Validator;
 
-// request check
-$requestInfo    = array(
-    'page'              => $_GET['page'] ?? 1 ,
-);
-
-$validator = new Validator($requestInfo);
-$validator->rule('integer', 'page');
-if($validator->validate()) {
-    $requestInfo = $validator->data();
-}else{
-    echo $validator->errorsJsAlert("privacy-register.php");
-    exit();
-}
 
 // form params
 $formInfo           = array(
@@ -45,26 +32,36 @@ if( $validator->validate()) {       					// validation 성공
     $formInfo['is_adult'] = 'Y';
     $formInfo['is_agree'] = 'Y';
 } else {               									// validation 실패
-    echo $validator->errorsJsAlert("reaction.php");
+    CommonFunc::jsAlert('필수 항목이 누락되었습니다.','location.href="index.php";');
     exit;
 }
+$today = Date('Y-m-d');
 
 // database 처리
 $db = new ModelBase();
-$db->init();
-$db->beginTransaction();
-$db->from('REACTION');
-if ($db->insert($formInfo)){
-    //commit
-    $db->executeTransaction();
-    $db->close();
-    CommonFunc::jsAlert('등록 되었습니다.','location.href="reaction.php";');
-}else{
-    //rollBack
-    $db->rollBack();
-    $db->close();
 
-    CommonFunc::jsAlert("등록에 실패하였습니다.\\n확인 후 다시 시도해 주세요.",'location.href="reaction.php";');
+$query = "SELECT * from REACTION where userphone = '".$formInfo['userphone']."' and date_format(reg_date,'%Y-%m-%d') = '".$today."'  ";
+$db->query($query);
+$result = $db->getAll();
+$listCnt = count($result);
+
+if($listCnt>0){
+    CommonFunc::jsAlert('리액션 및 보너스 이벤트는 1일 1회 참여가 가능합니다.','location.href="index.php";');
+}else{
+    $db->init();
+    $db->beginTransaction();
+    $db->from('REACTION');
+    if ($db->insert($formInfo)){
+        //commit
+        $db->executeTransaction();
+        $db->close();
+        CommonFunc::jsAlert($formInfo['username'].'님의 리액션 참여가 완료되었습니다.','location.href="index.php";');
+    }else{
+        //rollBack
+        $db->rollBack();
+        $db->close();
+        CommonFunc::jsAlert("리액션 참여가 실패하였습니다.\\n확인 후 다시 시도해 주세요.",'location.href="index.php";');
+    }
 }
 ?>
 

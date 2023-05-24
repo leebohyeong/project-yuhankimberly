@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas class="canvas1" width="200" height="50"></canvas>
+<canvas class="canvas2" width="200" height="50"></canvas>
+
+<script>
+    (() => {
+        const canvas1 = document.querySelector(".canvas1");
+        const ctx1 = canvas1.getContext("2d");
+
+        const cw1 = canvas1.width / 2;
+        const ch1 = canvas1.height / 2;
+
+        ctx1.font = "14px 바탕체";
+        ctx1.textAlign = "center";
+        ctx1.fillStyle = "blue";
+        ctx1.strokeStyle = "blue"
+        ctx1.beginPath();
+        ctx1.roundRect(0, 0, 200, 50, [40]);
+        ctx1.stroke();
+        ctx1.fillText('알갱이가 씹혀요',cw1 , ch1);
+
+
+        const canvas2 = document.querySelector(".canvas2");
+        const ctx2 = canvas2.getContext("2d");
+
+        const cw2 = canvas2.width / 2;
+        const ch2 = canvas2.height / 2;
+
+        // const textWidth = ctx2.measureText('달달한 맛 쳐돌이').width;
+        ctx2.font = "14px 바탕체";
+        ctx2.textAlign = "center";
+        ctx2.fillStyle = "red";
+        ctx2.fillText('달달한 맛 쳐돌이', cw2, ch2);
+
+    })();
+</script>
+</body>
+</html>

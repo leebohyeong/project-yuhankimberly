@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/vendors.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <style>
+        img {
+            margin: 30px;
+            border: 1px solid #d4cdc0;
+        }
+    </style>
+</head>
+<body>
+
+<a href="#" download="image">다운로드</a><br><br>
+
+<script>
+    const data = {
+        size: {
+            text: '패밀리',
+        },
+        title: {
+            text: '초코처돌이는 지금 초코가 매우매우 먹고 싶다',
+        },
+        tag: {
+            text: ['알갱이가 씹혀요', '달달한 맛 쳐돌이', '사르르 녹아요', '알갱이가씹혀요알갱이가씹혀요씹혀요요씹혀요', '초코 광인의 선택', '본연의 맛을 느껴봐요', '초코 광인의 선택', '본연의 맛을 느껴봐요'],
+        },
+        flavor: {
+            imagePath: [
+                '/assets/images/_temp/product/1733107149.png',
+                '/assets/images/_temp/product/1727918465.png',
+                '/assets/images/_temp/product/1720745560.png',
+                '/assets/images/_temp/product/1623256634.png',
+                '/assets/images/_temp/product/1530777439.png',
+                '/assets/images/_temp/product/1530778136.png'
+            ],
+            text: [
+                '엄마는 외계인 made with 기라델리 초콜릿',
+                '블랙 슈가 밤',
+                '벅스 버니버니 당근당근',
+                '오레오 쿠키 앤 크림치즈',
+                '바람과 함께 사라지다',
+                '레인보우 샤베트'
+            ]
+        },
+        creator: {
+            text: 'lalajdfl'
+        }
+    }
+    const createMyflavorListImage = async (data) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const textEllipsis = (text, textMaxLength) => {
+            return text.split(' ').reduce((newText, text, index) => {
+                if (!index) {
+                    newText.push(
+                        text.length > textMaxLength
+                            ? `${text.substring(0, textMaxLength - 3)}...`
+                            : text
+                    );
+
+                    return newText;
+                }
+
+                const tempText = newText[newText.length - 1];
+
+                if (tempText.endsWith('...')) return newText;
+
+                if (tempText.length + 1 + text.length <= textMaxLength) {
+                    newText[newText.length - 1] = `${tempText} ${text}`;
+                } else {
+                    newText.push(text);
+                }
+
+                if (newText.length > 2) {
+                    newText[1] = `${`${newText[1]} ${newText[2]}`.substring(0, textMaxLength - 3)}...`;
+                    newText.length = 2;
+                }
+
+                return newText;
+            }, []);
+        };
+        const info = {
+            stage: {
+                width: 700,
+                height: 700,
+                paddingTop: 50,
+                paddingRight: 50,
+                paddingLeft: 50,
+                init() {
+                    canvas.width = this.width;
+                    canvas.height = this.height;
+                    canvas.style.cssText = `width: ${this.width}px; height: ${this.height}px`;
+
+                    ctx.fillStyle = '#fff';
+                    ctx.fillRect(0, 0, this.width, this.height);
+                }
+            },
+            size: {
+                color: ['#41332c', '#ff8195'],
+                font: '600 20px Pretendard',
+                text: ['마이 플레이버 리스트'],
+                width: [],
+                height: [],
+                marginRight: 8,
+                getHeight() {
+                    return Math.max(...this.height);
+                },
+                init() {
+                    ctx.font = this.font;
+
+                    this.text.forEach((text) => {
+                        const textMetrics = ctx.measureText(text);
+
+                        this.width.push(Math.ceil(textMetrics.width));
+                        this.height.push(Math.ceil(textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent));
+                    });
+                },
+                render() {
+                    ctx.font = this.font;
+                    let left = info.stage.paddingLeft;
+                    const top = Math.max(...this.height) + info.stage.paddingTop;
+
+                    this.text.forEach((text, index) => {
+                        ctx.fillStyle = this.color[index];
+                        ctx.fillText(text, left, top);
+                        left += this.width[index] + this.marginRight;
+                    });
+
+                    this.offsetTop = info.stage.paddingTop;
+                }
+            },
+            title: {
+                containerMarginTop: 30,
+                iconPath: '/assets/images/play/myflavor/icon_view.png',
+                iconMarginRight: 25,
+                iconImage: '',
+                color: '#000',
+                font: '600 45px Pretendard',
+                lineHeight: 0,
+                text: [],
+                textMarginTop: 10,
+                getHeight() {
+                    return this.iconImage.naturalHeight;
+                },
+                init() {
+                    this.text = textEllipsis(this.text, 12);
+                    ctx.font = this.font;
+                    const textMetrics = ctx.measureText(this.text[0]);
+                    this.lineHeight = Math.ceil(textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent);
+                },
+                render() {
+                    ctx.fillStyle = this.color;
+                    ctx.font = this.font;
+
+                    const containerTop = info.size.offsetTop + info.size.getHeight() + this.containerMarginTop;
+                    const textMetrics = ctx.measureText(this.text[0]);
+                    const fontHeight = Math.ceil((this.getHeight() - (this.lineHeight * this.text.length + this.textMarginTop * (this.text.length - 1))) / 2);
+                    const fontTop = containerTop + fontHeight + Math.ceil(textMetrics.actualBoundingBoxAscent);
+                    const fontLeft = info.stage.paddingLeft + this.iconImage.naturalWidth + this.iconMarginRight;
+
+                    ctx.drawImage(this.iconImage, info.stage.paddingLeft, containerTop);
+
+                    this.text.forEach((text, index) => {
+                        ctx.fillText(text, fontLeft, fontTop + (this.lineHeight + this.textMarginTop) * index);
+                    });
+
+                    this.offsetTop = containerTop;
+                }
+            },
+            tag: {
+                containerMarginTop: 30,
+                marginTop: 8,
+                marginRight: 8,
+                paddingTop: 8,
+                paddingRight: 20,
+                paddingBottom: 8,
+                paddingLeft: 20,
+                borderColor: '#cecdc8',
+                color: '#000',
+                font: '500 14px Pretendard',
+                lineHeight: 0,
+                text: [],
+                textWidth: [],
+                positionTop: [],
+                positionLeft: [],
+                getHeight() {
+                    const rowLength = new Set(this.positionTop).size;
+
+                    return (this.lineHeight + this.paddingTop + this.paddingBottom) * rowLength + this.marginTop * (rowLength - 1);
+                },
+                init() {
+                    const containerWidth = info.stage.width - info.stage.paddingRight - info.stage.paddingLeft + this.marginRight;
+                    ctx.font = this.font;
+
+                    const result = this.text.reduce((result, text, index) => {
+                        const textMetrics = ctx.measureText(text);
+                        const textWidth = textMetrics.width + this.paddingRight + this.paddingLeft;
+                        const textHalfWidth = Math.ceil(textWidth / 2);
+                        const isOver = (result.positionLeft[index - 1] + result.tempWidth[index - 1] + this.marginRight * 2 + textWidth) > containerWidth;
+
+                        if (index) {
+                            if (isOver) {
+                                result.positionLeft.push(textHalfWidth);
+                                result.positionTop.push(result.positionTop[index - 1] + this.marginTop + this.lineHeight + this.paddingTop + this.paddingBottom);
+                            } else {
+                                result.positionLeft.push(result.positionLeft[index - 1] + result.tempWidth[index - 1] + this.marginRight + textHalfWidth);
+                                result.positionTop.push(result.positionTop[index - 1]);
+                            }
+                        } else {
+                            this.lineHeight = Math.ceil(textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent);
+                            result.positionLeft.push(textHalfWidth);
+                            result.positionTop.push(Math.ceil(textMetrics.actualBoundingBoxAscent) + this.paddingTop);
+                        }
+
+                        result.tempWidth.push(textHalfWidth);
+                        result.textWidth.push(Math.ceil(textWidth));
+
+                        return result;
+                    }, {positionTop: [], positionLeft: [], textWidth: [], tempWidth: []});
+
+                    this.positionTop = result.positionTop;
+                    this.positionLeft = result.positionLeft;
+                    this.textWidth = result.textWidth;
+                },
+                render() {
+                    const containerTop = info.title.offsetTop + info.title.getHeight() + this.containerMarginTop;
+                    const containerLeft = info.stage.paddingLeft;
+                    const height = this.lineHeight + this.paddingTop + this.paddingBottom;
+                    const radius = ~~(height / 2);
+                    let topIndex = 0;
+                    let currentTextTop = 0;
+
+                    this.text.forEach((text, index) => {
+                        const width = this.textWidth[index];
+                        const textLeft = containerLeft + this.positionLeft[index];
+                        const textTop = containerTop + this.positionTop[index];
+                        const left = textLeft - (this.textWidth[index] / 2);
+                        if (index === 0) currentTextTop = textTop;
+                        if (currentTextTop !== textTop) {
+                            currentTextTop = textTop;
+                            topIndex++;
+                        }
+                        const top = containerTop + (height + this.marginTop) * topIndex;
+                        ctx.beginPath();
+                        ctx.moveTo(left + radius, top);
+                        ctx.lineTo(left + width - radius, top);
+                        ctx.quadraticCurveTo(left + width, top, left + width, top + radius);
+                        ctx.lineTo(left + width, top + height - radius);
+                        ctx.quadraticCurveTo(left + width, top + height, left + width - radius, top + height);
+                        ctx.lineTo(left + radius, top + height);
+                        ctx.quadraticCurveTo(left, top + height, left, top + height - radius);
+                        ctx.lineTo(left, top + radius);
+                        ctx.quadraticCurveTo(left, top, left + radius, top);
+                        ctx.closePath();
+                        ctx.strokeStyle = this.borderColor;
+                        ctx.lineJoin = 'round';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                        ctx.fillStyle = this.color;
+                        ctx.font = this.font;
+                        ctx.textAlign = 'center';
+                        ctx.fillText(text, textLeft, textTop);
+                    });
+
+                    this.offsetTop = containerTop;
+                }
+            },
+            line: {
+                containerMarginTop: 40,
+                color: '#e2dfd8',
+                width: 1,
+                pattern: [6, 3],
+                getHeight() {
+                    return this.width;
+                },
+                render() {
+                    const containerTop = info.tag.offsetTop + info.tag.getHeight() + this.containerMarginTop;
+
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = this.width;
+                    ctx.beginPath();
+                    ctx.setLineDash(this.pattern);
+                    ctx.moveTo(info.stage.paddingLeft, containerTop);
+                    ctx.lineTo(info.stage.width - info.stage.paddingRight, containerTop);
+                    ctx.stroke();
+                    ctx.closePath();
+
+                    this.offsetTop = containerTop;
+                }
+            },
+            flavor: {
+                containerMarginTop: 40,
+                columnSize: 4,
+                marginTop: 30,
+                marginRight: 10,
+                marginLeft: 10,
+                paddingRight: 20,
+                paddingLeft: 20,
+                image: [],
+                imagePath: [],
+                imageSize: 100,
+                color: '#000',
+                font: '500 16px Pretendard',
+                fontMarginTop: 10,
+                fontRowMarginTop: 4,
+                lineHeight: 0,
+                text: [],
+                height: [],
+                getHeight() {
+                    const textHeight = this.text.reduce((height, text, index) => {
+                        const textHeight = text.length * this.lineHeight + this.fontMarginTop + this.fontRowMarginTop * (text.length - 1);
+
+                        if (index % this.columnSize) {
+                            if (textHeight > height[height.length - 1]) {
+                                height[height.length - 1] = textHeight;
+                            }
+                        } else {
+                            height.push(textHeight);
+                        }
+                        return height;
+                    }, []);
+
+                    return textHeight.reduce((totalHeight, textHeight, index) => {
+                        const height = this.imageSize + textHeight;
+
+                        this.height.push(height);
+                        totalHeight += height + this.marginTop * index;
+                        return totalHeight;
+                    }, 0);
+                },
+                init() {
+                    this.text = this.text.map(text => textEllipsis(text, 10));
+                    ctx.font = this.font;
+                    const textMetrics = ctx.measureText(this.text[0]);
+                    this.lineHeight = Math.ceil(textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent);
+                },
+                render() {
+                    const containerTop = info.line.offsetTop + info.line.getHeight() + this.containerMarginTop;
+                    const width = this.imageSize + this.paddingRight + this.paddingLeft + this.marginRight + this.marginLeft;
+                    const halfWidth = width / 2;
+                    const containerLeft = (info.stage.width - width * this.columnSize) / 2;
+                    const imageHalfSize = this.imageSize / 2;
+
+                    ctx.font = this.font;
+                    ctx.fillStyle = this.color;
+                    ctx.textAlign = 'center';
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.save();
+
+                    this.text.forEach((texts, index) => {
+                        const currentRow = Math.ceil((index + 1) / this.columnSize) - 1;
+                        const top = containerTop + (currentRow ? this.height[currentRow - 1] : 0) + this.marginTop * currentRow;
+                        const left = containerLeft + width * (index % this.columnSize);
+                        const leftHalf = left + halfWidth;
+
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(leftHalf, top + imageHalfSize, imageHalfSize, 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.clip();
+                        ctx.drawImage(this.image[index], left + this.paddingLeft + this.marginLeft - imageHalfSize, top - imageHalfSize, this.imageSize * 2, this.imageSize * 2);
+                        ctx.restore();
+
+                        texts.forEach((text, index) => {
+                            const textTop = top + this.imageSize + this.fontMarginTop + this.lineHeight * (index + 1) + this.fontRowMarginTop * (index - 1);
+                            ctx.fillText(text, leftHalf, textTop);
+                        });
+                    });
+                    ctx.restore();
+
+                    this.offsetTop = containerTop;
+                },
+            },
+            creator: {
+                containerMarginTop: 50,
+                color: '#666',
+                font: '500 16px Pretendard',
+                text: '',
+                lineHeight: 0,
+                getHeight() {
+                    return this.containerMarginTop ? this.lineHeight : 0;
+                },
+                init() {
+                    if (info.flavor.text.length > 4) {
+                        this.containerMarginTop = 0;
+                    }
+
+                    ctx.font = this.font;
+                    const textMetrics = ctx.measureText(this.text);
+                    this.lineHeight = Math.ceil(textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent);
+                    this.text = `By ${this.text.substring(0, this.text.length - 4)}****`;
+                },
+                render() {
+                    const containerTop = info.flavor.offsetTop + info.flavor.getHeight() + this.containerMarginTop;
+
+                    ctx.fillStyle = this.color;
+                    ctx.font = this.font;
+                    ctx.textAlign = 'right';
+                    ctx.fillText(this.text, info.stage.width - info.stage.paddingRight, containerTop);
+                }
+            }
+        };
+
+        const [titleImage, ...flavorImage] = await Promise.allSettled([info.title.iconPath, ...data.flavor.imagePath].map(imageSrc => new Promise((resolve, reject) => {
+            const image = new Image();
+
+            image.onload = () => resolve(image);
+            image.onerror = () => reject(imageSrc);
+            image.src = imageSrc;
+        })));
+
+        info.title.iconImage = titleImage.value;
+        info.flavor.image = flavorImage.map(image => image.value || '');
+
+        info.size.text.push(data.size.text);
+        info.title.text = data.title.text;
+        info.tag.text = data.tag.text;
+        info.flavor.text = data.flavor.text;
+        info.creator.text = data.creator.text;
+
+        info.stage.init();
+        info.size.init();
+        info.title.init();
+        info.tag.init();
+        info.flavor.init();
+        info.creator.init();
+
+        let totalContainerHeight = 0;
+
+        totalContainerHeight += info.size.getHeight();
+        totalContainerHeight += info.title.getHeight() + info.title.containerMarginTop;
+        totalContainerHeight += info.tag.getHeight() + info.tag.containerMarginTop;
+        totalContainerHeight += info.line.getHeight() + info.line.containerMarginTop;
+        totalContainerHeight += info.flavor.getHeight() + info.flavor.containerMarginTop;
+        totalContainerHeight += info.creator.getHeight() + info.creator.containerMarginTop;
+        info.stage.paddingTop = Math.ceil((info.stage.height - totalContainerHeight) / 2);
+
+        info.size.render();
+        info.title.render();
+        info.tag.render();
+        info.line.render();
+        info.flavor.render();
+        info.creator.render();
+
+        return canvas.toDataURL('image/png');
+    };
+
+    (async () => {
+        const imageData = await createMyflavorListImage(data);
+        const image = document.createElement('img');
+        image.width = 700;
+        image.src = imageData;
+        document.body.appendChild(image);
+        document.querySelector('a').href = imageData;
+    })();
+</script>
+</body>
+</html>
