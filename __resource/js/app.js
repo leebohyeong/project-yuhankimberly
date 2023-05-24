@@ -1,6 +1,7 @@
 import {findOne, find, getOffset, on} from './helper';
 import Modal from "./Modal";
-import Swiper, {Autoplay, Navigation, Pagination } from 'swiper';
+import Swiper, {Autoplay, Navigation, Pagination} from 'swiper';
+
 Swiper.use([Navigation, Pagination]);
 
 const app = () => {
@@ -48,7 +49,7 @@ const app = () => {
                     moveSection(index);
                     toggleLink();
                 } else {
-                    alert('Comming Soon');
+                    alert('Coming Soon');
                 }
             });
 
@@ -115,16 +116,11 @@ const app = () => {
     (() => {
         const mainEvent = findOne('.main__event');
         const numberCases = findOne('p strong', mainEvent);
-        const numberCasesInner = numberCases.innerHTML;
+        const numberCasesInner = numberCases.innerText.trim() || 0;
         const numberCasesGauge = findOne('p > span', mainEvent);
 
-
         const getReactionGauge = () => {
-            if(!numberCasesInner == '') {
-                numberCasesGauge.style.width = `calc(${numberCasesInner} / 10000 * 100%)`
-            } else {
-                numberCases.innerHTML = '0';
-            }
+            numberCasesGauge.style.width = `calc(${numberCasesInner ? numberCasesInner.replace(/\D/g, '') : numberCasesInner} / 10000 * 100%)`
         };
 
         on(window, 'load', getReactionGauge);
@@ -135,9 +131,10 @@ const app = () => {
     (() => {
         const modal = new Modal();
         const mainEvent = findOne('.main__event');
+        const eventModal = findOne('.event-modal');
         const triggers = findOne('.main__event-link', mainEvent);
         const getId = triggers.getAttribute('href');
-        const form = findOne('.event-modal form');
+        const form = findOne('form', eventModal);
         const formScores = find('[name="score"]', form);
         const formThemes = find('[name="theme"]', form);
         const formReview = findOne('[name="review"]', form);
@@ -168,14 +165,13 @@ const app = () => {
         })
 
         //글자수 제한
-        document.addEventListener('keyup', (event) => {
+        // document.addEventListener('keyup', (event) => {
+        formReview.addEventListener('input', (event) => {
             event.preventDefault();
 
-            const eventModal = findOne('.event-modal');
-            const textarea = findOne('#review', eventModal);
             const count = findOne('textarea + p span', eventModal);
+            const content = formReview.value;
 
-            const content = textarea.value;
             count.innerHTML = content.length;
 
             if (content.length > 150) {
@@ -237,11 +233,11 @@ const app = () => {
             return true;
         }
 
-        form.addEventListener('submit', () => {
-            // event.preventDefault();
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-            if (isValid()) {
-                // modal.close();
+            if(isValid()){
+                form.submit();
             }
         });
 

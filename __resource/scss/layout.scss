@@ -2,8 +2,13 @@
 
 
 body {
-    max-width: var(--main-section-width);
-    margin: 0 auto;
+    width: 100%;
+    background-color: #fff;
+    
+    > div {
+        max-width: var(--main-section-width);
+        margin: 0 auto;
+    }
 }
 
 .header {
@@ -33,6 +38,11 @@ body {
         height: getSize(30px);
         background: url(/assets/images/img_logo_color.png) no-repeat center/cover;
 
+        @include media-queries($from: md) {
+            width: 103px;
+            height: 30px;
+        }
+
         span {
             @include visually-hidden;
         }
@@ -42,8 +52,11 @@ body {
         display: flex;
         align-items: center;
         column-gap: getSize(30px);
-    }
 
+        @include media-queries($to: xs) {
+            column-gap: 6px;
+        }
+    }
 
     &__link {
         display: block;
@@ -52,6 +65,14 @@ body {
         color: var(--site-header-menu-color);
         font-weight: $font-weight-medium;
         font-size: getSize(22px);
+
+        @include media-queries($from: md) {
+            font-size: 16px;
+        }
+
+        @include media-queries($to: xs) {
+            font-size: 10px;
+        }
 
         &::after {
             position: absolute;
@@ -224,12 +245,13 @@ body {
                     margin-top: getSize(30px);
 
                     textarea {
-                        height: getSize(140px);
+                        //height: getSize(140px);
+                        padding: 10px;
                         resize: none;
                     }
 
                     textarea::placeholder {
-                        padding: getSize(25px) 0 0 getSize(28px);
+                        //padding: getSize(25px) 0 0 getSize(28px);
                         font-size: getSize(24px);
                         color: #a9a9a9;
                     }
@@ -256,7 +278,7 @@ body {
                 }
 
                 input[type="text"]::placeholder {
-                    padding-left: getSize(28px);
+                    //padding-left: getSize(28px);
                     font-size: getSize(24px);
                     color: #a9a9a9;
                 }
@@ -308,6 +330,10 @@ body {
                         padding-left: getSize(50px);
                         color: #535353;
                         font-size: getSize(22px);
+
+                        @include media-queries($from: md) {
+                            font-size: 14px;
+                        }
 
                         @include media-queries($to: xs) {
                             padding-left: 18px;

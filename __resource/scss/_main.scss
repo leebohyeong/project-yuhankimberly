@@ -128,13 +128,13 @@
     }
 
     &__event {
-
         > div {
             position: relative;
             background: {
                 position: center;
                 repeat: no-repeat;
                 size: cover;
+                color: #fff;
             };
 
             &:nth-of-type(1) {
@@ -173,8 +173,12 @@
                 > div {
                     width: min(100% - 40px, 640px);
                     margin: 0 auto;
-                    padding-top: 29px;
-                    background: url(/assets/images/img_event_text.png) no-repeat right top;
+                    padding-top: 20px;
+                    background: url(/assets/images/img_event_text.png) no-repeat right top/contain;
+
+                    @include media-queries($from: md) {
+                        padding-top: 40px;
+                    }
 
                     p {
                         position: relative;
@@ -205,7 +209,5 @@
                 aspect-ratio: 720/600;
             }
         }
-
     }
-
 }
