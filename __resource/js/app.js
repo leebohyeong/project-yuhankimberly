@@ -284,7 +284,7 @@ const app = () => {
             image.onload = function() {
                 setTimeout(() => {
                     intro.style.display = 'none'
-                }, 1000)
+                }, 5000)
             };
             image.src = "/assets/images/img_loading.jpg";
 
