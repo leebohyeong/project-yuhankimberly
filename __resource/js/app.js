@@ -193,6 +193,13 @@ const app = () => {
 
         //form 유효성검사
         const isValid = () => {
+
+            if (formScores.every(input => !input.checked)) {
+                alert('별점을 선택해 주세요.');
+                formScores[0].focus();
+                return false;
+            }
+
             if (formThemes.every(input => !input.checked)) {
                 alert('주제를 선택해 주세요.');
                 formThemes[0].focus();

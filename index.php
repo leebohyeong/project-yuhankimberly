@@ -17,7 +17,7 @@ $db->close();
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -249,6 +249,11 @@ $db->close();
             <p>
                 <a href="https://www.yuhan-kimberly.co.kr/" target="_blank">
                     <span>유한킴벌리 홈페이지 바로 가기</span>
+                </a>
+            </p>
+            <p>
+                <a href="https://www.yuhan-kimberly.co.kr/Customer/Company" target="_blank">
+                    <span>회사대표 이메일</span>
                 </a>
             </p>
         </footer>
