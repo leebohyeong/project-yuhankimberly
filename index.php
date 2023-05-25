@@ -34,6 +34,15 @@ $db->close();
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/vendors.js"></script>
     <script src="/assets/js/app.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LHJFCK2K3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9LHJFCK2K3');
+    </script>
 </head>
 <body>
     <div class="intro"></div>
