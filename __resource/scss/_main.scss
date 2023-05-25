@@ -171,6 +171,7 @@
                 }
 
                 > div {
+                    overflow: hidden;
                     width: min(100% - 40px, 640px);
                     margin: 0 auto;
                     padding-top: 20px;

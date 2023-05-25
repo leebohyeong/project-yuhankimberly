@@ -86,7 +86,7 @@
                 </div>
                 <div>
                     <p>
-                        <strong>1,983</strong>건
+                        <strong>156132123</strong>건
                     </p>
                     <div>
                         <p><span></span></p>
