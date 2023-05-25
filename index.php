@@ -1,4 +1,19 @@
 <?php
+/** ==============================================================================
+ * File: 관리자 > 로그인 처리 (reaction-proc.php)
+ * Date: 2023-05-22 오후 5:00
+ * Created by @krabbit2.DevGroup
+ * Copyright 2023, xn-939awia823kba64a723b9ulkh4aca.com(Group IDD). All rights are reserved
+ * ==============================================================================*/
+require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
+
+use \Groupidd\Model\ModelBase;
+
+$db = new ModelBase();
+$db->from("REACTION");
+// paging setting
+$listCnt        = $db->getCountAll();
+$db->close();
 
 ?>
 <!doctype html>
@@ -86,7 +101,7 @@
                 </div>
                 <div>
                     <p>
-                        <strong>1,983</strong>건
+                        <strong><?=$listCnt?></strong>건
                     </p>
                     <div>
                         <p><span></span></p>
