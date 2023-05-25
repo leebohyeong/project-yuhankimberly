@@ -23,7 +23,13 @@ $db->close();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>유한킴벌리</title>
+    <meta name="description" content="1984년부터 시작한 대표 숲환경 캠페인 우리강산 푸르게푸르게 캠페인을 소개합니다">
+    <meta name="keywords" content="유한킴벌리, 유한킴벌리 우리강산 푸르게 푸르게, 우리강산 푸르게 푸르게, 유한킴벌리 우푸푸, 우푸푸
+우리강산푸르게푸르게 반성문, 우리강산푸르게푸르게 39주년 반성문">
+    <meta property="og:title" content="[우리강산 푸르게 푸르게 39주년 반성문]">
+    <meta property="og:description" content="우리강산 푸르게 푸르게 39주년 반성문 캠페인 자세히 보러가기">
+    <meta property="og:image" content="/assets/images/og_image.png">
+    <title>유한킴벌리 우리강산 푸르게 푸르게</title>
     <link rel="stylesheet" href="/assets/css/vendors.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/vendors.js"></script>
