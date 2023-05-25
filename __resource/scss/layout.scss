@@ -116,15 +116,32 @@ body {
 
     a {
         position: absolute;
-        top: 69.5%;
-        left: 35%;
-        width: 38%;
-        height: 5.5%;
 
         span {
             @include visually-hidden;
         }
     }
+
+    p {
+        &:nth-of-type(1) {
+            a {
+                top: 69.5%;
+                left: 35%;
+                width: 38%;
+                height: 5.5%;
+            }
+        }
+
+        &:nth-of-type(2) {
+            a {
+                top: 84%;
+                left: 43%;
+                width: 24%;
+                height: 3.5%;
+            }
+        }
+    }
+
 }
 
 .event-modal {

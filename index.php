@@ -17,17 +17,32 @@ $db->close();
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>유한킴벌리</title>
+    <meta name="description" content="1984년부터 시작한 대표 숲환경 캠페인 우리강산 푸르게푸르게 캠페인을 소개합니다">
+    <meta name="keywords" content="유한킴벌리, 유한킴벌리 우리강산 푸르게 푸르게, 우리강산 푸르게 푸르게, 유한킴벌리 우푸푸, 우푸푸
+우리강산푸르게푸르게 반성문, 우리강산푸르게푸르게 39주년 반성문">
+    <meta property="og:title" content="[우리강산 푸르게 푸르게 39주년 반성문]">
+    <meta property="og:description" content="우리강산 푸르게 푸르게 39주년 반성문 캠페인 자세히 보러가기">
+    <meta property="og:image" content="/assets/images/og_image.png">
+    <title>유한킴벌리 우리강산 푸르게 푸르게</title>
     <link rel="stylesheet" href="/assets/css/vendors.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/vendors.js"></script>
     <script src="/assets/js/app.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LHJFCK2K3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9LHJFCK2K3');
+    </script>
 </head>
 <body>
     <div class="intro"></div>
@@ -249,6 +264,11 @@ $db->close();
             <p>
                 <a href="https://www.yuhan-kimberly.co.kr/" target="_blank">
                     <span>유한킴벌리 홈페이지 바로 가기</span>
+                </a>
+            </p>
+            <p>
+                <a href="https://www.yuhan-kimberly.co.kr/Customer/Company" target="_blank">
+                    <span>회사대표 이메일</span>
                 </a>
             </p>
         </footer>
