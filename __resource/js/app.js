@@ -10,8 +10,8 @@ const app = () => {
         const header = findOne('.header');
 
         const headerHeight = header.clientHeight;
-        const headerInitClassName = 'header--main-init';
-        const scrollHeader = () => header.classList[window.scrollY < header.clientHeight ? 'add' : 'remove'](headerInitClassName);
+        // const headerInitClassName = 'header--main-init';
+        // const scrollHeader = () => header.classList[window.scrollY < header.clientHeight ? 'add' : 'remove'](headerInitClassName);
 
         const links = find('.header__link', header);
         const bannerLinks = find('.intro-carousel a');
@@ -69,7 +69,7 @@ const app = () => {
         on(window, 'load', getSectionsStart);
         on(window, 'resize', getSectionsStart);
         on(window, 'scroll', toggleLink);
-        on(window, 'scroll', scrollHeader);
+        // on(window, 'scroll', scrollHeader);
 
     })();
 

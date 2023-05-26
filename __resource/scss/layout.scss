@@ -25,16 +25,16 @@ body {
 .header {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: #222;
     z-index: 100;
 
-    &--main-init {
-        background-color: #222;
-
-        .header__logo {
-            background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
-        }
-    }
+    //&--main-init {
+    //    background-color: #222;
+    //
+    //    .header__logo {
+    //        background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
+    //    }
+    //}
 
     > div {
         display: flex;
@@ -47,7 +47,7 @@ body {
         display: block;
         width: getSize(103px);
         height: getSize(30px);
-        background: url(/assets/images/img_logo_color.png) no-repeat center/cover;
+        background: url(/assets/images/img_logo_white.png) no-repeat center/cover;
 
         @include media-queries($from: md) {
             width: 103px;
@@ -75,14 +75,14 @@ body {
         padding: getSize(26px) 0;
         color: var(--site-header-menu-color);
         font-weight: $font-weight-medium;
-        font-size: getSize(22px);
+        font-size: 13px;
 
         @include media-queries($from: md) {
             font-size: 16px;
         }
 
         @include media-queries($to: xs) {
-            font-size: 10px;
+            font-size: 12px;
         }
 
         &::after {
