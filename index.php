@@ -45,7 +45,9 @@ $db->close();
     </script>
 </head>
 <body>
-    <div class="intro"></div>
+    <div class="intro">
+        <div class="intro__loading-icon"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <div class="container">
         <header class="header">
             <div>
