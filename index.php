@@ -45,9 +45,11 @@ $db->close();
     </script>
 </head>
 <body>
-    <div class="intro"></div>
+    <div class="intro">
+        <div class="intro__loading-icon"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     <div class="container">
-        <header class="header header--main-init">
+        <header class="header">
             <div>
                 <h1>
                     <a href="#" class="header__logo">
@@ -57,7 +59,7 @@ $db->close();
                 <nav>
                     <ul>
                         <li><a href="#main__intro" class="header__link header__link--active">39주년 반성문</a></li>
-                        <li><a href="#main__event" class="header__link">리액션 이벤트</a></li>
+                        <li><a href="#main__event" class="header__link">이벤트</a></li>
                         <li><a href="#main__donation" class="header__link">기부참여</a></li>
                         <li><a href="#main__story" class="header__link">우리의 이야기</a></li>
                     </ul>
@@ -172,7 +174,7 @@ $db->close();
                                         </div>
                                     </fieldset>
                                     <div>
-                                        <textarea id="review" name="review" rows="3" maxlength="150" placeholder="한줄평 남기기(150자 제한)"></textarea>
+                                        <textarea id="review" name="review" rows="3" maxlength="150" placeholder="150자 이내로 작성해 주세요."></textarea>
                                         <p>
                                             <span></span>
                                             / 150
