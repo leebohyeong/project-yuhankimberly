@@ -162,19 +162,19 @@ $result = $db->getAll();
                 <colgroup>
                     <col width="5%">
                     <col width="7%">
-                    <col width="19%">
+                    <col width="12%">
+                    <col width="10%">
+                    <col width="17%">
                     <col width="*%">
-                    <col width="15%">
-                    <col width="15%">
                 </colgroup>
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>이름</th>
+                        <th>연락처</th>
                         <th>별점</th>
                         <th>주제</th>
                         <th>한줄평</th>
-                        <th>이름</th>
-                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -182,25 +182,46 @@ $result = $db->getAll();
                 if($listCnt > 0){
                     foreach ($result as $idx=>$row) {
                         $rownum = $listCnt-($idx+$currentPage);
+                        if($row['score']==1){
+                            $score = "★";
+                        }elseif ($row['score']==2){
+                            $score = "★★";
+                        }elseif ($row['score']==3){
+                            $score = "★★★";
+                        }elseif ($row['score']==4){
+                            $score = "★★★★";
+                        }elseif ($row['score']==5){
+                            $score = "★★★★★";
+                        }
+                        $username = CommonFunc::stringDecrypt($row['username'], $ENCRYPT_KEY_);
+                        $uname = mb_substr($username, 0, 1);
+                        for($i=1; $i<mb_strlen($username);$i++){
+                            $uname = $uname." *";
+                        }
+                        $userphone = CommonFunc::stringDecrypt($row['userphone'], $ENCRYPT_KEY_);
+                        $uphone = mb_substr($userphone, 0, 7);
+                        for($i=7; $i<mb_strlen($userphone);$i++){
+                            $uphone = $uphone."*";
+                        }
                         ?>
                         <tr>
                             <td>
                                 <?=$rownum?>
                             </td>
                             <td>
-                                <?=$row['score']?>
+                                <?=$uname?>
+                            </td>
+                            <td>
+                                <?=$uphone?>
+                            </td>
+                            <td>
+                                <?=$score?>
                             </td>
                             <td>
                                 <?=$row['category']?>
                             </td>
                             <td>
                                 <?=$row['content']?>
-                            </td>
-                            <td>
-                                <?=CommonFunc::stringDecrypt($row['username'], $ENCRYPT_KEY_)?>
-                            </td>
-                            <td>
-                                <?=date('Y-m-d', strtotime($row['reg_date']))?>
                             </td>
                         </tr>
                         <?php
