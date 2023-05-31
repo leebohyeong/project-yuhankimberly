@@ -289,6 +289,11 @@ $db->close();
                 </a>
             </p>
             <p>
+                <a href="https://www.yksso.co.kr/terms/brand" target="_blank">
+                    <span>개인정보처리방침</span>
+                </a>
+            </p>
+            <p>
                 <a href="https://www.yuhan-kimberly.co.kr/Customer/Company" target="_blank">
                     <span>회사대표 이메일</span>
                 </a>
