@@ -28,7 +28,9 @@ $db->close();
 우리강산푸르게푸르게 반성문, 우리강산푸르게푸르게 39주년 반성문">
     <meta property="og:title" content="[우리강산 푸르게 푸르게 39주년 반성문]">
     <meta property="og:description" content="우리강산 푸르게 푸르게 39주년 반성문 캠페인 자세히 보러가기">
-    <meta property="og:image" content="/assets/images/og_image.png">
+    <meta property="og:image" content="https://우리강산푸르게푸르게.com/assets/images/og_image.png">
+    <meta property="og:url" content="https://우리강산푸르게푸르게.com">
+    <meta property="og:site_name" content="유한킴벌리 우리강산 푸르게 푸르게">
     <title>유한킴벌리 우리강산 푸르게 푸르게</title>
     <link rel="stylesheet" href="/assets/css/vendors.css">
     <link rel="stylesheet" href="/assets/css/app.css">
