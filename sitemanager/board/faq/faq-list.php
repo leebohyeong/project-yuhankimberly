@@ -19,7 +19,7 @@ $requestInfo    = array(
     'search_category'   => $_GET['search_category'] ?? '',
     'from_date'         => $_GET['from_date'] ?? '',
     'to_date'           => $_GET['to_date'] ?? '',
-    'search_is_view'    => $_GET['search_is_view'] ?? ''
+    'mail'    => $_GET['mail'] ?? ''
 );
 
 $validator = new Validator($requestInfo);
@@ -31,6 +31,10 @@ if($validator->validate()) {                // validation 성공
 }else{
     echo $validator->errorsJsAlert();
     exit();
+}
+
+if($requestInfo["mail"]=="success"){
+    CommonFunc::jsAlert('메일이 전송되었습니다.','');
 }
 
 $db = new ModelBase();
@@ -146,7 +150,7 @@ $result = $db->getAll();
         <div class="top-group">
             <p>총 <?=number_format($listCnt)?>건이 검색되었습니다.</p>
             <div>
-                <button type="button" class="button red" data-btn="eventBtn" data-fn="excel">엑셀 다운로드</button>
+                <button type="button" class="button red" data-btn="eventBtn" data-fn="excel">메일 전송</button>
             </div>
         </div>
         <form name="frm" action="/sitemanager/board/faq/faq-del-hide-proc.php" method="post">
@@ -156,7 +160,7 @@ $result = $db->getAll();
             <input type="hidden" name="search_category" value="<?=$requestInfo['search_category']?>">
             <input type="hidden" name="from_date" value="<?=$requestInfo['from_date']?>">
             <input type="hidden" name="to_date" value="<?=$requestInfo['to_date']?>">
-            <input type="hidden" name="search_is_view" value="<?=$requestInfo['search_is_view']?>">
+            <input type="hidden" name="mail" value="<?=$requestInfo['mail']?>">
             <input type="hidden" name="topon">
             <table class="table">
                 <colgroup>
