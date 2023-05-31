@@ -60,7 +60,7 @@ $db->close();
                     <ul>
                         <li><a href="#main__intro" class="header__link header__link--active">39주년 반성문</a></li>
                         <li><a href="#main__event" class="header__link">이벤트</a></li>
-                        <li><a href="#main__donation" class="header__link">기부참여</a></li>
+                        <li><a href="#main__donation" class="header__link">기부하기</a></li>
                         <li><a href="#main__story" class="header__link">우리의 이야기</a></li>
                     </ul>
                 </nav>
