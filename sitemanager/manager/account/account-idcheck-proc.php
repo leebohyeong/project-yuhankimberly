@@ -11,7 +11,6 @@ use \Groupidd\Model\ModelBase;
 use \Groupidd\Library\Validator;
 
 $response   = array();
-$response['csrf_token']  = $CSRF_->generate('baskin_token');            // csrf token 재생성해서 return
 
 $formInfo   = array(
     'admin_id' => $_POST['admin_id'] ?? ''        // 어드민 아이디

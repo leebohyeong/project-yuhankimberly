@@ -13,7 +13,6 @@ use \Groupidd\Library\Validator;
 use \Groupidd\Common\CommonFunc;
 
 $response   = array();
-$response['csrf_token']  = $CSRF_->generate('baskin_token');            // csrf token 재생성해서 return
 
 $formInfo  = array(
     'seq'       => $_POST['seq'] ?? '',
