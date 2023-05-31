@@ -154,7 +154,7 @@ unset($requestInfo['seq']);
                         <label for="" class="form-label">* 비밀번호 설정</label>
                     </th>
                     <td>
-                        <button type="button" class="button button--black width-200" data-btn="eventBtn" data-fn="pwReset">비밀번호 초기화</button> <span>*클릭 시 ‘brkorea31@’ 로 초기화 됩니다.</span>
+                        <button type="button" class="button button--black width-200" data-btn="eventBtn" data-fn="pwReset">비밀번호 초기화</button> <span>*클릭 시 ‘yuhan0601@’ 로 초기화 됩니다.</span>
                     </td>
                 </tr>
                 <tr>

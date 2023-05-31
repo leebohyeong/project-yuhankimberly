@@ -16,6 +16,7 @@ $requestInfo    = array(
     'page'              => $_GET['page'] ?? 1,
     'search'            => $_GET['search'] ?? '',
     'findword'          => $_GET['findword'] ?? '',
+    'search_category'   => $_GET['search_category'] ?? '',
     'from_date'         => $_GET['from_date'] ?? '',
     'to_date'           => $_GET['to_date'] ?? '',
     'mail'    => $_GET['mail'] ?? ''
@@ -23,7 +24,7 @@ $requestInfo    = array(
 
 $validator = new Validator($requestInfo);
 $validator->rule('integer', 'page');
-$validator->rule('in', 'search', array('username','userphone'));
+$validator->rule('in', 'search', array('answer','content'));
 if($validator->validate()) {                // validation 성공
     $requestInfo = $validator->data();
     $page     	 = $requestInfo['page'];    // 페이지 번호
@@ -32,19 +33,23 @@ if($validator->validate()) {                // validation 성공
     exit();
 }
 
-if($requestInfo["mail"]=="success"){
-    CommonFunc::jsAlert('메일이 전송되었습니다.','');
-}
-
 $db = new ModelBase();
 $db->from("REACTION");
 // search
 if( !empty($requestInfo['search']) && !empty($requestInfo['findword'])){
-    $db->where($requestInfo['search'], CommonFunc::stringEncrypt($requestInfo['findword'], $ENCRYPT_KEY_));
-//}elseif (empty($requestInfo['search']) && !empty($requestInfo['findword']) && $requestInfo['search']=="userphone"){
+    $db->like($requestInfo['search'], $requestInfo['findword']);
+}elseif (empty($requestInfo['search']) && !empty($requestInfo['findword'])){
+    $db->like('answer', $requestInfo['findword']);
+    $db->or_like('content', $requestInfo['findword']);
+}
+if (!empty($requestInfo['search_category'])){
+    $db->where('category', $requestInfo['search_category']);
 }
 if ($requestInfo['from_date'] != '' && $requestInfo['to_date'] != '') {
     $db->between('reg_date', "'".$requestInfo['from_date'].' 00:00:00'."'",  "'".$requestInfo['to_date'].' 23:59:59'."'");
+}
+if (!empty($requestInfo['search_is_view'])){
+    $db->where('is_view', $requestInfo['search_is_view']);
 }
 // paging setting
 $listCnt        = $db->getCountAll();
@@ -52,8 +57,9 @@ $perPage        = 20;
 $pageSize       = ceil($listCnt/$perPage);
 $currentPage    = ($page-1) * $perPage;
 
-$db->select("seq, score, category, content, username, userphone, reg_date", true);
-$db->orderby('seq', 'desc');
+$db->select("date_format(reg_date,'%Y-%m') day, count(seq) cnt ", true);
+$db->groupby('day');
+$db->orderby('day', 'desc');
 $db->limit($perPage, $currentPage );
 $result = $db->getAll();
 
@@ -73,7 +79,7 @@ $result = $db->getAll();
         </ul>
         <h2>리액션 참가자</h2>
     </headder>
-    <form name="frm_search" class="search" >
+    <form name="frm_search" class="search" style="display: none" >
         <input type="hidden" name="page" value="<?=$page?>"/>
         <div>
             <div>
@@ -81,15 +87,24 @@ $result = $db->getAll();
                 <div>
                     <div class="select-input-group">
                         <select name="search" class="form-input width-100">
-                            <option value="">선택</option>
-                            <option value="username" <?=CommonFunc::getSelected('username', $requestInfo['search'])?>>이름</option>
-                            <option value="userphone" <?=CommonFunc::getSelected('userphone', $requestInfo['search'])?>>연락처</option>
+                            <option value="">전체</option>
+                            <option value="content" <?=CommonFunc::getSelected('content', $requestInfo['search'])?>>질문</option>
+                            <option value="answer" <?=CommonFunc::getSelected('answer', $requestInfo['search'])?>>답변</option>
                         </select>
                         <input type="text" name="findword" value="<?=$requestInfo['findword']?>" class="form-input">
                     </div>
                 </div>
             </div>
+            <div>
+                <div>구분</div>
+                <div>
+                    <div class="select-input-group">
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div>
             <div>
                 <div>기간</div>
                 <div>
@@ -97,6 +112,26 @@ $result = $db->getAll();
                         <input type="text" name="from_date" value="<?=$requestInfo['from_date']?>" readonly>
                         <span>-</span>
                         <input type="text" name="to_date" value="<?=$requestInfo['to_date']?>" readonly>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>노출여부</div>
+                <div class="label-wrap">
+                    <div class="radio-group">
+                        <label>
+                            <span>전체</span>
+                            <input type="radio" name="search_is_view" value="" checked>
+                        </label>
+                        <label>
+                            <span>Y</span>
+                            <input type="radio" name="search_is_view" value="Y" <?=CommonFunc::getChecked($requestInfo['search_is_view'], 'Y')?>>
+                        </label>
+                        <label>
+                            <span>N</span>
+                            <input type="radio" name="search_is_view" value="N" <?=CommonFunc::getChecked($requestInfo['search_is_view'], 'N')?>>
+                        </label>
+
                     </div>
                 </div>
             </div>
@@ -110,7 +145,7 @@ $result = $db->getAll();
 
     <div class="contents">
         <div class="top-group">
-            <p>총 <?=number_format($listCnt)?>건이 검색되었습니다.</p>
+            <p>전체 참여자 : <?=number_format($listCnt)?></p>
             <div>
                 <button type="button" class="button red" data-btn="eventBtn" data-fn="excel">메일 전송</button>
             </div>
@@ -119,9 +154,11 @@ $result = $db->getAll();
             <input type="hidden" name="page" value="<?=$requestInfo['page']?>">
             <input type="hidden" name="search" value="<?=$requestInfo['search']?>">
             <input type="hidden" name="findword" value="<?=$requestInfo['findword']?>">
+            <input type="hidden" name="search_category" value="<?=$requestInfo['search_category']?>">
             <input type="hidden" name="from_date" value="<?=$requestInfo['from_date']?>">
             <input type="hidden" name="to_date" value="<?=$requestInfo['to_date']?>">
             <input type="hidden" name="mail" value="<?=$requestInfo['mail']?>">
+            <input type="hidden" name="topon">
             <table class="table">
                 <colgroup>
                     <col width="5%">
@@ -130,67 +167,24 @@ $result = $db->getAll();
                     <col width="10%">
                     <col width="17%">
                     <col width="*%">
-                    <col width="12%">
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>이름</th>
-                        <th>연락처</th>
-                        <th>별점</th>
-                        <th>주제</th>
-                        <th>한줄평</th>
-                        <th>등록일</th>
+                        <th>month</th>
+                        <th>참여자 수</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                 if($listCnt > 0){
                     foreach ($result as $idx=>$row) {
-                        $rownum = $listCnt-($idx+$currentPage);
-                        if($row['score']==1){
-                            $score = "★";
-                        }elseif ($row['score']==2){
-                            $score = "★★";
-                        }elseif ($row['score']==3){
-                            $score = "★★★";
-                        }elseif ($row['score']==4){
-                            $score = "★★★★";
-                        }elseif ($row['score']==5){
-                            $score = "★★★★★";
-                        }
-                        $username = CommonFunc::stringDecrypt($row['username'], $ENCRYPT_KEY_);
-                        $uname = mb_substr($username, 0, 1);
-                        for($i=1; $i<mb_strlen($username);$i++){
-                            $uname = $uname." *";
-                        }
-                        $userphone = CommonFunc::stringDecrypt($row['userphone'], $ENCRYPT_KEY_);
-                        $uphone = mb_substr($userphone, 0, 7);
-                        for($i=7; $i<mb_strlen($userphone);$i++){
-                            $uphone = $uphone."*";
-                        }
                         ?>
                         <tr>
                             <td>
-                                <?=$rownum?>
+                                <?=$row['day']?>
                             </td>
                             <td>
-                                <?=$uname?>
-                            </td>
-                            <td>
-                                <?=$uphone?>
-                            </td>
-                            <td>
-                                <?=$score?>
-                            </td>
-                            <td>
-                                <?=$row['category']?>
-                            </td>
-                            <td>
-                                <?=$row['content']?>
-                            </td>
-                            <td>
-                                <?=$row['reg_date']?>
+                                <?=$row['cnt']?>
                             </td>
                         </tr>
                         <?php

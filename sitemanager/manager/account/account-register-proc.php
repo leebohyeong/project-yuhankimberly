@@ -95,7 +95,7 @@ if(isset($_POST['admin_lv'])){
 if( $validator->validate()) {       					// validation 성공
     $formInfo 				= $validator->data(); 		// 데이터 받아오기
     $formInfo['admin_id']  = mb_strtolower($formInfo['admin_id']);          // 아이디&비번은 소문자로..
-    $formInfo['admin_pw']  = mb_strtolower('brkorea31@');
+    $formInfo['admin_pw']  = mb_strtolower('yuhan0601@');
 
     // 비밀번호 암호화
     $formInfo['admin_pw']  = hash('sha512', $formInfo['admin_pw']);

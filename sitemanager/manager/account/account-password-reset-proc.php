@@ -30,7 +30,7 @@ if($validator->validate()) {       			// validation 성공
     exit();
 }
 
-$admin_pw  = mb_strtolower('brkorea31@');
+$admin_pw  = mb_strtolower('yuhan0601@');
 $admin_pw  = hash('sha512', $admin_pw);
 
 $db = new ModelBase();
