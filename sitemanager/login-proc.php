@@ -19,9 +19,6 @@ $formInfo= array();
 $formInfo['admin_id']  = isset($_POST['admin_id'])? $_POST['admin_id'] : '';
 $formInfo['admin_pw']  = isset($_POST['admin_pw'])? $_POST['admin_pw'] : '';
 
-//$formInfo['admin_id']  = 'groupidd2';
-//$formInfo['admin_pw']  = 'groupidd2018!';
-
 $validator = new Validator($formInfo);
 
 $validator->rule('required', 'admin_id')->message('ID는 필수 입력값입니다.1');
@@ -71,57 +68,57 @@ if (empty($result)){
 // 로그인 실패5 : 비밀번호 오류 횟수가 5회 이상일 때 + 계정잠금 상태로 처리
 if( $result['login_fail_cnt'] >= 6){
     // login log
-//    $db->init();
-//    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'패스워드 오류횟수 초과');
-//    $db->from("ADMIN_LOGIN_LOG");
-//    $db->insert($insertInfo);
+    $db->init();
+    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'패스워드 오류횟수 초과');
+    $db->from("ADMIN_LOGIN_LOG");
+    $db->insert($insertInfo);
 
     // 로그인 6회 이상 실패시 계정 잠금 처리
-//    $db->init();
-//    $updateInfo = array('status'=>'S');
-//    $db->from('ADMIN_MEMBER');
-//    $db->where('admin_id',$adminID);
-//    $db->update($updateInfo);
+    $db->init();
+    $updateInfo = array('status'=>'S');
+    $db->from('ADMIN_MEMBER');
+    $db->where('admin_id',$adminID);
+    $db->update($updateInfo);
 
     // response
-//    $response['message']  = "패스워드입력 초과회수가 6회 이상이므로 계정 잠금 처리 되었습니다.\n계속 이용하고 싶으시면 관리자에게 문의하여 주시기 바랍니다.";
-//    $response['result']   = false;
-//    echo json_encode($response);
-//    $db->close();
-//    exit();
+    $response['message']  = "패스워드입력 초과회수가 6회 이상이므로 계정 잠금 처리 되었습니다.\n계속 이용하고 싶으시면 관리자에게 문의하여 주시기 바랍니다.";
+    $response['result']   = false;
+    echo json_encode($response);
+    $db->close();
+    exit();
 }
 
 // 로그인 실패2 : 승인상태가 권한중지일때
 if($result['status'] == 'S'){
     // login log
-//    $db->init();
-//    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'권한중지 사용자 로그인 시도');
-//    $db->from("ADMIN_LOGIN_LOG");
-//    $db->insert($insertInfo);
+    $db->init();
+    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'권한중지 사용자 로그인 시도');
+    $db->from("ADMIN_LOGIN_LOG");
+    $db->insert($insertInfo);
 
     // response
-//    $response['message']    = "권한중지된 정보입니다.\n관리자에게 문의하여 주시기 바랍니다.";
-//    $response['result']     = false;
-//    echo json_encode($response);
-//    $db->close();
-//    exit;
+    $response['message']    = "권한중지된 정보입니다.\n관리자에게 문의하여 주시기 바랍니다.";
+    $response['result']     = false;
+    echo json_encode($response);
+    $db->close();
+    exit;
 }
 
 // 로그인 실패3 : 패스워드 정보가 일치하지 않을 때 -> 로그인 실패 횟수+1
 if($adminPW_encode != $result['admin_pw']) {
 
     // 로그인 실패 횟수 +1
-//    $db-> init();
-//    $updateInfo = array('login_fail_cnt'=>'login_fail_cnt + 1');
-//    $db->from('ADMIN_MEMBER');
-//    $db->where('admin_id', $adminID);
-//    $db->update($updateInfo);
+    $db-> init();
+    $updateInfo = array('login_fail_cnt'=>'login_fail_cnt + 1');
+    $db->from('ADMIN_MEMBER');
+    $db->where('admin_id', $adminID);
+    $db->update($updateInfo);
 
     // login log
-//    $db->init();
-//    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'패스워드 정보 불일치');
-//    $db->from("ADMIN_LOGIN_LOG");
-//    $db->insert($insertInfo);
+    $db->init();
+    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'패스워드 정보 불일치');
+    $db->from("ADMIN_LOGIN_LOG");
+    $db->insert($insertInfo);
 
     // response
     $response['message']    = "계정정보가 올바르지 않습니다..";      // 유추할수 있는 패스워드가 틀렸습니다 라는 메세지는 띄우지 않습니다.
@@ -161,24 +158,24 @@ if (!empty($result['login_last_date'])){
 	$diff = date_diff($last_login_date,$now_date);
 	if( $diff->days >= 30){
 		// login log
-//		$db->init();
-//		$insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'마지막 로그인 날짜 '. $diff->days .'일 초과');
-//		$db->from("ADMIN_LOGIN_LOG");
-//		$db->insert($insertInfo);
+		$db->init();
+		$insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'마지막 로그인 날짜 '. $diff->days .'일 초과');
+		$db->from("ADMIN_LOGIN_LOG");
+		$db->insert($insertInfo);
 
 		// 30일 이상 접근 기록 없음 - 계정 잠금
 //		$db->init();
-//		$update = array('status'=>'S');
-//		$db->from('ADMIN_MEMBER');
-//		$db->where('admin_id',$adminID);
-//		$db->update($update);
+		$update = array('status'=>'S');
+		$db->from('ADMIN_MEMBER');
+		$db->where('admin_id',$adminID);
+		$db->update($update);
 
 		// response
-//		$response['message']  = "30일 이상 접근 기록이 없어 잠금 계정 처리 되었습니다.\n계속 이용하고 싶으시면 관리자에게 문의하여 주시기 바랍니다.";
-//		$response['result']   = false;
-//		echo json_encode($response);
-//		$db->close();
-//		exit();
+		$response['message']  = "30일 이상 접근 기록이 없어 잠금 계정 처리 되었습니다.\n계속 이용하고 싶으시면 관리자에게 문의하여 주시기 바랍니다.";
+		$response['result']   = false;
+		echo json_encode($response);
+		$db->close();
+		exit();
 	}
 }
 
@@ -201,10 +198,10 @@ if ($result['default_pw_YN'] == 'Y') {
 // 로그인 실패8 : 승인대기
 if($result['status'] == 'W'){
     // login log
-//    $db->init();
-//    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'승인대기 사용자 로그인 시도');
-//    $db->from("ADMIN_LOGIN_LOG");
-//    $db->insert($insertInfo);
+    $db->init();
+    $insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'N', 'result_log'=>'승인대기 사용자 로그인 시도');
+    $db->from("ADMIN_LOGIN_LOG");
+    $db->insert($insertInfo);
 
     // response
     $response['message']    = "승인대기중인 계정입니다.\n관리자에게 문의하여 주시기 바랍니다.";
@@ -221,12 +218,12 @@ if (!empty($result['change_pw_date'])){
     $diff = date_diff($change_pw_date, $now_date);
     if ( $diff->days >= 90) {
         // response
-//        $response['message']            = "패스워드 변경일이 90일 지났습니다. 보완 강화를 위해 패스워드를 변경해 주시기 바랍니다.";
-//        $response['password_setting']   = true;
-//        $response['result']             = false;
-//        echo json_encode($response);
-//        $db->close();
-//        exit();
+        $response['message']            = "패스워드 변경일이 90일 지났습니다. 보완 강화를 위해 패스워드를 변경해 주시기 바랍니다.";
+        $response['password_setting']   = true;
+        $response['result']             = false;
+        echo json_encode($response);
+        $db->close();
+        exit();
     }
 }
 
@@ -249,10 +246,10 @@ $db->update($updateInfo);
 
 // login log
 $db->init();
-//$insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'Y', 'result_log'=>'로그인 성공');
-//$db->from("ADMIN_LOGIN_LOG");
-//$db->insert($insertInfo);
-//$db->close();
+$insertInfo = array('admin_id'=>$adminID , 'access_ip'=>$USER_IP_ , 'success_YN'=>'Y', 'result_log'=>'로그인 성공');
+$db->from("ADMIN_LOGIN_LOG");
+$db->insert($insertInfo);
+$db->close();
 
 $return_url = "/sitemanager/board/faq/faq-list.php";
 

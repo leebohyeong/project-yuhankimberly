@@ -118,7 +118,7 @@ $db->close();
                 </div>
                 <div>
                     <p>
-                        <strong><?=$listCnt?></strong>건
+                        <strong><?=number_format($listCnt)?></strong>건
                     </p>
                     <div>
                         <p><span></span></p>
