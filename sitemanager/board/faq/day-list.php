@@ -53,7 +53,7 @@ if (!empty($requestInfo['search_is_view'])){
 }
 // paging setting
 $listCnt        = $db->getCountAll();
-$perPage        = 20;
+$perPage        = 999;
 $pageSize       = ceil($listCnt/$perPage);
 $currentPage    = ($page-1) * $perPage;
 
@@ -77,7 +77,7 @@ $result = $db->getAll();
         <ul>
             <li>게시판</li>
         </ul>
-        <h2>리액션 참가자</h2>
+        <h2>일별 참여자</h2>
     </headder>
     <form name="frm_search" class="search" style="display: none" >
         <input type="hidden" name="page" value="<?=$page?>"/>

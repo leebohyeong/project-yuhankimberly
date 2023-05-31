@@ -171,7 +171,6 @@ unset($requestInfo['seq']);
                         <div class="select-input-group">
                             <select name="belong" id="" class="form-input width-100">
                                 <option value="" <?=CommonFunc::getSelected('', $result['belong'])?>>선택</option>
-                                <option value="BR KOREA" <?=CommonFunc::getSelected('BR KOREA', $result['belong'])?>>BR KOREA</option>
                                 <option value="외부" <?=CommonFunc::getSelected('외부', $result['belong'])?>>외부</option>
                             </select>
                             <input type="text" class="form-input width-200" name="department" maxlength="50" value="<?=$result['department']?>">

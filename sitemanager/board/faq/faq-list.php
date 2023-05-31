@@ -71,7 +71,7 @@ $result = $db->getAll();
         <ul>
             <li>게시판</li>
         </ul>
-        <h2>리액션 참가자</h2>
+        <h2>이벤트 참여자</h2>
     </headder>
     <form name="frm_search" class="search" >
         <input type="hidden" name="page" value="<?=$page?>"/>

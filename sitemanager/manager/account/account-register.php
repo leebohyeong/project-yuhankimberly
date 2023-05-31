@@ -103,7 +103,6 @@ if($validator->validate()) {                // validation 성공
                             <div class="select-input-group">
                                 <select name="belong" id="" class="form-input width-100">
                                     <option value="">선택</option>
-                                    <option value="BR KOREA">BR KOREA</option>
                                     <option value="외부">외부</option>
                                 </select>
                                 <input type="text" class="form-input width-200" name="department" maxlength="50">

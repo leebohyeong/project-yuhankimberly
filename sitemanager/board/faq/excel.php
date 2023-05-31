@@ -134,9 +134,9 @@ fclose($fp);
 
 
 
-//echo send_email_google("aj0228@groupidd.com", "안은주", "[유한킴벌리] ".date('Y-m-d', time())." 참여자 데이터", date('Y-m-d', time())."기준 참여자 데이터입니다.", $excelPath);
+echo send_email_google("aj0228@groupidd.com", "안은주", "[유한킴벌리] ".date('Y-m-d', time())." 이벤트 참여자", date('Y-m-d', time())."기준 참여자 데이터입니다.", $excelPath);
 
-echo send_email_google("krabbit2@groupidd.com", "조기현", "[유한킴벌리] ".date('Y-m-d', time())." 참여자 데이터", date('Y-m-d', time())."기준 참여자 데이터입니다.", $excelPath);
+//echo send_email_google("krabbit2@groupidd.com", "조기현", "[유한킴벌리] ".date('Y-m-d', time())." 참여자 데이터", date('Y-m-d', time())."기준 참여자 데이터입니다.", $excelPath);
 
 
 function send_email_google ($user_email, $user_name, $subject, $content, $excelPath) {
@@ -170,7 +170,7 @@ function send_email_google ($user_email, $user_name, $subject, $content, $excelP
     // 이름은 적용이 되는데 메일 적용이 안된다 구글에서 막아놓음. (보내지긴 하는데 user mail로 수정됨)
     // 보내는 사람 메일을 바꾸려면 User메일의 별칭 메일에 send mail을 추가해야 함. (master@mydomain.io가 실제 메일을 받을 수 있어야함)
     $mail->addAddress($user_email, $user_name); //받는 사람
-    //$mail->addAddress("choeun@groupidd.com", "조은"); //받는 사람
+    $mail->addAddress("choeun@groupidd.com", "조은"); //받는 사람
     $mail->addAddress("krabbit2@groupidd.com", "조기현"); //받는 사람
     //$mail->addCC('mojito@groupidd.com');				// 참조
     $mail->isHTML(true);
