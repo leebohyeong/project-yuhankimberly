@@ -44,7 +44,7 @@ const app = () => {
         links.forEach((link, index) => {
             on(link, 'click', (event) => {
                 event.preventDefault();
-                if (index !== 2 && index !== 3) {
+                if (index !== 3) {
                     moveSection(index);
                     toggleLink();
                 } else {
@@ -57,7 +57,7 @@ const app = () => {
             on(bannerLink, 'click', (event) => {
                 event.preventDefault();
 
-                if (index !== 2 && index !== 3) {
+                if (index !== 3) {
                     moveSection(index);
                     toggleLink();
                 } else {
@@ -274,7 +274,7 @@ const app = () => {
         } else {
             const headerHeight = findOne('.header').clientHeight;
             const tabList = findOne('.intro-tab');
-            const tabListTop = getOffset(tabList).top;;
+            const tabListTop = getOffset(tabList).top;
             const tabLink = find('.intro-tab__nav-link')[getIntroUrlValue-1];
             const image = new Image();
 
@@ -299,6 +299,28 @@ const app = () => {
 
     })();
 
+    //intro modal
+    (() => {
+        const modal = new Modal();
+        const introTab = findOne('.intro-tab');
+        const buttons = find('button', introTab);
+        const tabModal = findOne('#introModal');
+        const tabModalContent = findOne('.modal__content', tabModal);
+
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                tabModalContent.style.backgroundImage = `url(/assets/images/img_intro_tab_modal_contents_${index + 1}.jpg)`
+                modal.open(tabModal);
+            })
+        })
+
+        tabModalContent.addEventListener('click', () => {
+            modal.close(tabModal);
+        })
+
+    })();
 }
 
 document.addEventListener('DOMContentLoaded', app);

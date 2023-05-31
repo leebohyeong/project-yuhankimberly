@@ -108,19 +108,32 @@
             &__contents {
                 > div {
                     display: none;
+                    position: relative;
                     background: {
                         position: center;
                         repeat: no-repeat;
                         size: cover;
                     };
-                    aspect-ratio: 720/1222;
-
-                    //&:nth-of-type(1) {
-                    //    aspect-ratio: 720/1222;
-                    //}
+                    aspect-ratio: 720/1334;
 
                     &.intro-tab__nav-link--active {
                         display: block;
+                    }
+                }
+
+                button {
+                    display: block;
+                    position: absolute;
+                    bottom: 4.5%;
+                    left: 50%;
+                    width: 46.78%;
+                    height: 6.4%;
+                    transform: translateX(-50%);
+                    background: transparent;
+                    border: none;
+
+                    span {
+                        @include visually-hidden;
                     }
                 }
             }
@@ -209,6 +222,45 @@
             &:nth-of-type(4) {
                 aspect-ratio: 720/600;
             }
+        }
+    }
+
+    &__donation {
+        position: relative;
+        background: url(/assets/images/img_donation.jpg) no-repeat center/cover;
+        aspect-ratio: 720/964;
+
+        a {
+            display: block;
+            position: absolute;
+            bottom: 7.1%;
+            left: 50%;
+            width: 48.5%;
+            height: 8.8%;
+            transform: translateX(-50%);
+
+            span {
+                @include visually-hidden;
+            }
+        }
+    }
+    
+    .intro-modal {
+        .modal__container {
+            padding: 0;
+        }
+
+        .modal__content {
+            background:  {
+                position: center;
+                repeat: no-repeat;
+                size: cover;
+            };
+            aspect-ratio: 700/900;
+        }
+
+        .modal__close-button {
+            background-image: url(/assets/images/icon_event_modal_close_button--white.png);
         }
     }
 }

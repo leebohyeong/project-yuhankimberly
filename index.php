@@ -99,12 +99,12 @@ $db->close();
                         </ul>
                     </div>
                     <div class="intro-tab__contents">
-                        <div class="intro-tab__nav-link--active" style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"></div>
-                        <div style="background-image: url(/assets/images/img_intro_tab_contents_2.jpg)"></div>
-                        <div style="background-image: url(/assets/images/img_intro_tab_contents_3.jpg)"></div>
-                        <div style="background-image: url(/assets/images/img_intro_tab_contents_4.jpg)"></div>
-                        <div style="background-image: url(/assets/images/img_intro_tab_contents_5.jpg)"></div>
-                        <div style="background-image: url(/assets/images/img_intro_tab_contents_6.jpg)"></div>
+                        <div class="intro-tab__nav-link--active" style="background-image: url(/assets/images/img_intro_tab_contents_1.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
+                        <div style="background-image: url(/assets/images/img_intro_tab_contents_2.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
+                        <div style="background-image: url(/assets/images/img_intro_tab_contents_3.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
+                        <div style="background-image: url(/assets/images/img_intro_tab_contents_4.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
+                        <div style="background-image: url(/assets/images/img_intro_tab_contents_5.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
+                        <div style="background-image: url(/assets/images/img_intro_tab_contents_6.jpg)"><button type="button"><span>반성문 원본 보기</span></button></div>
                     </div>
                 </div>
             </section>
@@ -127,9 +127,13 @@ $db->close();
                 <div style="background-image: url(/assets/images/img_event_2.jpg)"></div>
                 <div style="background-image: url(/assets/images/img_event_3.jpg)"></div>
             </section >
-            <section class="main__donation" id="main__donation"></section>
+            <section class="main__donation" id="main__donation">
+                <a href="https://happybean.naver.com/donations/H000000190289" target="_blank">
+                    <span>꿀벌 급식소 지원하기</span>
+                </a>
+            </section>
             <section class="main__story" id="main__story"></section>
-            <div class="event-modal modal" id="eventModal">
+            <div id="eventModal" class="event-modal modal">
                 <div class="modal__backdrop"></div>
                 <div class="modal__dialog modal-boost-us__dialog">
                     <div class="modal__container event-modal__container">
@@ -255,6 +259,17 @@ $db->close();
                                 </p>
                             </form>
                         </div>
+                        <div class="modal__close">
+                            <button class="modal__close-button" type="button"><span class="modal__close-text">닫기</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="introModal" class="intro-modal modal">
+                <div class="modal__backdrop"></div>
+                <div class="modal__dialog">
+                    <div class="modal__container">
+                        <div class="modal__content"></div>
                         <div class="modal__close">
                             <button class="modal__close-button" type="button"><span class="modal__close-text">닫기</span></button>
                         </div>
