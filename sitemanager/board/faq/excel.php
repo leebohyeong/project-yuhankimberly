@@ -86,7 +86,7 @@ ob_start();
                 ?>
                 <tr>
                     <td style="mso-number-format:\@;"><?= $count-- ?></td>
-                    <td style="mso-number-format:\@;"><?//= CommonFunc::stringDecrypt($value['name'], $ENCRYPT_KEY_) ?>
+                    <td>
                         <?php
                         $name = CommonFunc::stringDecrypt($value['username'], $ENCRYPT_KEY_);
                         //                                            $name   = $value['name'];
@@ -97,7 +97,7 @@ ob_start();
                         echo $name;
                         ?>
                     </td>
-                    <td>
+                    <td style=mso-number-format:"\@">
                         <?php
                         $phone = CommonFunc::stringDecrypt($value['userphone'], $ENCRYPT_KEY_);
                         if (!empty($phone) && mb_strlen($phone, 'utf-8') >= 10) {
